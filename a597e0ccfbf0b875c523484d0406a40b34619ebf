@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c4e4155_11b04cd5",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "add .settings?",
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c4e4155_31ad5080",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "Add the plugin name entry.",
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc71fd8c_d4679ca8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "Gerrit",
+      "range": {
+        "startLine": 6,
+        "startChar": 37,
+        "endLine": 6,
+        "endChar": 43
+      },
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc71fd8c_f46c988f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "Put all this in about.md?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 38
+      },
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c4e4155_51aad468",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "Gerrit",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc71fd8c_345ff0d3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "add a link?",
+      "range": {
+        "startLine": 25,
+        "startChar": 38,
+        "endLine": 25,
+        "endChar": 57
+      },
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc71fd8c_1462f498",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-03-25T23:38:41Z",
+      "side": 1,
+      "message": "documentation",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 29
+      },
+      "revId": "a597e0ccfbf0b875c523484d0406a40b34619ebf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
