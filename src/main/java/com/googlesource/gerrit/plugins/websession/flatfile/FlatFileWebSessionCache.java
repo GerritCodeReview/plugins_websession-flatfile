@@ -25,7 +25,6 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import org.eclipse.jgit.lib.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +65,7 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public ConcurrentMap<String, Val> asMap() {
-    ConcurrentMap<String, Val> map = new ConcurrentHashMap<String, Val>();
+    ConcurrentMap<String, Val> map = new ConcurrentHashMap<>();
     File[] files = dir.listFiles();
     if (files == null) {
       return map;
@@ -102,7 +101,7 @@ public class FlatFileWebSessionCache implements
   @Override
   public ImmutableMap<String, Val> getAllPresent(Iterable<?> keys) {
     ImmutableMap.Builder<String, Val> mapBuilder =
-        new ImmutableMap.Builder<String, Val>();
+        new ImmutableMap.Builder<>();
     for (Object key : keys) {
       Val v = getIfPresent(key);
       if (v != null) {
