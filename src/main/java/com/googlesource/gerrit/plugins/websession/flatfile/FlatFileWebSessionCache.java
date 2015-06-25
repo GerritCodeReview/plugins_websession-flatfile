@@ -60,7 +60,8 @@ public class FlatFileWebSessionCache implements
     dir = new File(cfg.getFromGerritConfig("websession-flatfile")
         .getString("directory", site.site_path + "/websessions"));
     if (!dir.exists()) {
-      log.error(dir.getAbsolutePath() + " not found");
+      log.info(dir.getAbsolutePath() + " not found.  Create it");
+      dir.mkdir();
     }
   }
 
@@ -148,10 +149,6 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public void put(String key, Val value) {
-    if (!dir.exists()) {
-      dir.mkdir();
-    }
-
     File tempFile = null;
     OutputStream fileStream = null;
     ObjectOutputStream objStream = null;
