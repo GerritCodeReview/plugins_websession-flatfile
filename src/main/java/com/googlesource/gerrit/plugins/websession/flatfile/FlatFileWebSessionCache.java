@@ -227,7 +227,7 @@ public class FlatFileWebSessionCache implements
   }
 
   private void deleteFile(File f) {
-    if (!f.delete()) {
+    if (f.exists() && !f.delete()) {
       log.warn("Cannot delete file " + f.getName() + " from cache "
           + dir.getAbsolutePath());
     }
