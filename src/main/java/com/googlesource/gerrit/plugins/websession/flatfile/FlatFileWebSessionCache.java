@@ -28,7 +28,6 @@ import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -149,20 +148,17 @@ public class FlatFileWebSessionCache implements
   @Override
   public void put(String key, Val value) {
     File tempFile = null;
-    OutputStream fileStream = null;
-    ObjectOutputStream objStream = null;
-
     try {
       tempFile = File.createTempFile(UUID.randomUUID().toString(), null, dir);
-      fileStream = new FileOutputStream(tempFile);
+      try (OutputStream fileStream = new FileOutputStream(tempFile);
+          ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
+        objStream.writeObject(value);
 
-      objStream = new ObjectOutputStream(fileStream);
-      objStream.writeObject(value);
-
-      File f = new File(dir, key);
-      if (!tempFile.renameTo(f)) {
-        log.warn("Cannot put into cache " + dir.getAbsolutePath()
-            + "; error renaming temp file");
+        File f = new File(dir, key);
+        if (!tempFile.renameTo(f)) {
+          log.warn("Cannot put into cache " + dir.getAbsolutePath()
+              + "; error renaming temp file");
+        }
       }
     } catch (FileNotFoundException e) {
       log.warn("Cannot put into cache " + dir.getAbsolutePath(), e);
@@ -172,8 +168,6 @@ public class FlatFileWebSessionCache implements
       if (tempFile != null) {
         deleteFile(tempFile);
       }
-      close(fileStream);
-      close(objStream);
     }
   }
 
@@ -200,25 +194,16 @@ public class FlatFileWebSessionCache implements
   }
 
   private Val readFile(File f) {
-    InputStream fileStream = null;
-    ObjectInputStream objStream = null;
-    try {
-      fileStream = new FileInputStream(f);
-      objStream = new ObjectInputStream(fileStream);
-      try {
+    try (InputStream fileStream = new FileInputStream(f);
+        ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
-      } catch (ClassNotFoundException e) {
-        log.warn("Entry " + f.getName() + " in cache " + dir.getAbsolutePath()
-            + " has an incompatible class and can't be deserialized. "
-            + "Invalidating entry.");
-        invalidate(f.getName());
-      }
-    } catch (FileNotFoundException e) {
+    } catch (ClassNotFoundException e) {
+      log.warn("Entry " + f.getName() + " in cache " + dir.getAbsolutePath()
+          + " has an incompatible class and can't be deserialized. "
+          + "Invalidating entry.");
+      invalidate(f.getName());
     } catch (IOException e) {
       log.warn("Cannot read cache " + dir.getAbsolutePath(), e);
-    } finally {
-      close(fileStream);
-      close(objStream);
     }
     return null;
   }
@@ -227,16 +212,6 @@ public class FlatFileWebSessionCache implements
     if (f.exists() && !f.delete()) {
       log.warn("Cannot delete file " + f.getName() + " from cache "
           + dir.getAbsolutePath());
-    }
-  }
-
-  private void close(Closeable c) {
-    if (c != null) {
-      try {
-        c.close();
-      } catch (IOException e) {
-        log.warn("Cannot close stream", e);
-      }
     }
   }
 }
