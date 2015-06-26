@@ -26,15 +26,17 @@ import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -49,28 +51,28 @@ public class FlatFileWebSessionCache implements
   private static final Logger log = LoggerFactory
       .getLogger(FlatFileWebSessionCache.class);
 
-  private final File dir;
+  private final Path dir;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir File dir) {
+  public FlatFileWebSessionCache(@WebSessionDir Path dir) {
     this.dir = dir;
-    if (!dir.exists()) {
+    if (Files.notExists(dir)) {
       log.info(dir + " not found. Creating it.");
-      dir.mkdir();
+      try {
+        Files.createDirectory(dir);
+      } catch (IOException e) {
+        log.error("Unable to create directory " + dir, e);
+      }
     }
   }
 
   @Override
   public ConcurrentMap<String, Val> asMap() {
     ConcurrentMap<String, Val> map = new ConcurrentHashMap<>();
-    File[] files = dir.listFiles();
-    if (files == null) {
-      return map;
-    }
-    for (File f : files) {
-      Val v = readFile(f);
+    for (Path path : listFiles()) {
+      Val v = readFile(path);
       if (v != null) {
-        map.put(f.getName(), v);
+        map.put(path.getFileName().toString(), v);
       }
     }
     return map;
@@ -97,8 +99,7 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public ImmutableMap<String, Val> getAllPresent(Iterable<?> keys) {
-    ImmutableMap.Builder<String, Val> mapBuilder =
-        new ImmutableMap.Builder<>();
+    ImmutableMap.Builder<String, Val> mapBuilder = new ImmutableMap.Builder<>();
     for (Object key : keys) {
       Val v = getIfPresent(key);
       if (v != null) {
@@ -112,8 +113,8 @@ public class FlatFileWebSessionCache implements
   @Nullable
   public Val getIfPresent(Object key) {
     if (key instanceof String) {
-      File f = new File(dir, (String) key);
-      return readFile(f);
+      Path path = dir.resolve((String) key);
+      return readFile(path);
     }
     return null;
   }
@@ -121,17 +122,14 @@ public class FlatFileWebSessionCache implements
   @Override
   public void invalidate(Object key) {
     if (key instanceof String) {
-      deleteFile(new File(dir, (String) key));
+      deleteFile(dir.resolve((String) key));
     }
   }
 
   @Override
   public void invalidateAll() {
-    File[] files = dir.listFiles();
-    if (files != null) {
-      for (File f : files) {
-        deleteFile(f);
-      }
+    for (Path path : listFiles()) {
+      deleteFile(path);
     }
   }
 
@@ -144,27 +142,17 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public void put(String key, Val value) {
-    File tempFile = null;
     try {
-      tempFile = File.createTempFile(UUID.randomUUID().toString(), null, dir);
-      try (OutputStream fileStream = new FileOutputStream(tempFile);
+      Path tempFile =
+          Files.createTempFile(dir, UUID.randomUUID().toString(), null);
+      try (OutputStream fileStream = Files.newOutputStream(tempFile);
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
-
-        File f = new File(dir, key);
-        if (!tempFile.renameTo(f)) {
-          log.warn("Cannot put into cache " + dir.getAbsolutePath()
-              + "; error renaming temp file");
-        }
+        Files.move(tempFile, tempFile.resolveSibling(key),
+            StandardCopyOption.REPLACE_EXISTING);
       }
-    } catch (FileNotFoundException e) {
-      log.warn("Cannot put into cache " + dir.getAbsolutePath(), e);
     } catch (IOException e) {
-      log.warn("Cannot put into cache " + dir.getAbsolutePath(), e);
-    } finally {
-      if (tempFile != null) {
-        deleteFile(tempFile);
-      }
+      log.warn("Cannot put into cache " + dir, e);
     }
   }
 
@@ -177,11 +165,7 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public long size() {
-    String[] files = dir.list();
-    if (files == null) {
-      return 0;
-    }
-    return files.length;
+    return listFiles().size();
   }
 
   @Override
@@ -190,25 +174,39 @@ public class FlatFileWebSessionCache implements
     return null;
   }
 
-  private Val readFile(File f) {
-    try (InputStream fileStream = new FileInputStream(f);
-        ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
+  private Val readFile(Path path) {
+    if (Files.exists(path)) {
+      try (InputStream fileStream = Files.newInputStream(path);
+          ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
-    } catch (ClassNotFoundException e) {
-      log.warn("Entry " + f.getName() + " in cache " + dir.getAbsolutePath()
-          + " has an incompatible class and can't be deserialized. "
-          + "Invalidating entry.");
-      invalidate(f.getName());
-    } catch (IOException e) {
-      log.warn("Cannot read cache " + dir.getAbsolutePath(), e);
+      } catch (ClassNotFoundException e) {
+        log.warn("Entry " + path + " in cache " + dir + " has an incompatible "
+            + "class and can't be deserialized. Invalidating entry.");
+        invalidate(path.getFileName().toString());
+      } catch (IOException e) {
+        log.warn("Cannot read cache " + dir, e);
+      }
     }
     return null;
   }
 
-  private void deleteFile(File f) {
-    if (f.exists() && !f.delete()) {
-      log.warn("Cannot delete file " + f.getName() + " from cache "
-          + dir.getAbsolutePath());
+  private void deleteFile(Path path) {
+    try {
+      Files.deleteIfExists(path);
+    } catch (IOException e) {
+      log.error("Error trying to delete " + path + " from " + dir, e);
     }
+  }
+
+  private List<Path> listFiles() {
+    List<Path> files = new ArrayList<>();
+    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir)) {
+      for (Path path : dirStream) {
+        files.add(path);
+      }
+    } catch (IOException e) {
+      log.error("Cannot list files in cache " + dir, e);
+    }
+    return files;
   }
 }
