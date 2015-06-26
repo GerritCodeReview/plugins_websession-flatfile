@@ -33,7 +33,8 @@ import com.google.inject.Singleton;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.ServletScopes;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,9 +53,9 @@ public class FlatFileWebSession extends CacheBasedWebSession {
     @Provides
     @Singleton
     @WebSessionDir
-    File getWebSessionDir(SitePaths site, PluginConfigFactory cfg,
+    Path getWebSessionDir(SitePaths site, PluginConfigFactory cfg,
         @PluginName String pluginName) {
-      return new File(cfg.getFromGerritConfig(pluginName).getString(
+      return Paths.get(cfg.getFromGerritConfig(pluginName).getString(
           "directory", site.site_path + "/websessions"));
     }
   }
