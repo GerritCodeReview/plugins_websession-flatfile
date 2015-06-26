@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.annotations.RootRelative;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.httpd.CacheBasedWebSession;
@@ -51,8 +52,9 @@ public class FlatFileWebSession extends CacheBasedWebSession {
     @Provides
     @Singleton
     @WebSessionDir
-    File getWebSessionDir(SitePaths site, PluginConfigFactory cfg) {
-      return new File(cfg.getFromGerritConfig("websession-flatfile").getString(
+    File getWebSessionDir(SitePaths site, PluginConfigFactory cfg,
+        @PluginName String pluginName) {
+      return new File(cfg.getFromGerritConfig(pluginName).getString(
           "directory", site.site_path + "/websessions"));
     }
   }
