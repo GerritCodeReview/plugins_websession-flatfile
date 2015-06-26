@@ -8,7 +8,7 @@ of this directory can be configured by adding an entry to the
 main Gerrit config file: $site_dir/etc/gerrit.config.  This
 location defaults to $site_dir/websessions.
 
-  [plugin "websession-flatfile"]
+  [plugin "@PLUGIN@"]
     directory = <disk_cache_directory>
   # NOTE: <disk_cache_directory> can be any location on the
   # shared filesystem that can be accessed by all servers,
