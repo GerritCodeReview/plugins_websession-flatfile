@@ -20,12 +20,9 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.httpd.WebSessionManager;
 import com.google.gerrit.httpd.WebSessionManager.Val;
-import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import org.eclipse.jgit.lib.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,9 +52,8 @@ public class FlatFileWebSessionCache implements
   private final File dir;
 
   @Inject
-  public FlatFileWebSessionCache(SitePaths site, PluginConfigFactory cfg) {
-    dir = new File(cfg.getFromGerritConfig("websession-flatfile")
-        .getString("directory", site.site_path + "/websessions"));
+  public FlatFileWebSessionCache(@WebSessionDir File dir) {
+    this.dir = dir;
     if (!dir.exists()) {
       log.error(dir.getAbsolutePath() + " not found");
     }
