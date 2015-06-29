@@ -236,6 +236,6 @@ public class FlatFileWebSessionCacheTest {
   }
 
   private InputStream loadFile(String file) {
-    return this.getClass().getResourceAsStream(file);
+    return this.getClass().getResourceAsStream("/" + file);
   }
 }
