@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3c0b916_0d32b11c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-06-29T14:59:04Z",
+      "side": 1,
+      "message": "use this instead, it fixes the tests: this.getClass().getResourceAsStream(existingKey);",
+      "range": {
+        "startLine": 225,
+        "startChar": 11,
+        "endLine": 225,
+        "endChar": 54
+      },
+      "revId": "937fe7f7be564fe278bd8afe5f7487e3816a733b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
