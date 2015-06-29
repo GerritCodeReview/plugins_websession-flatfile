@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f355d139_5737ac0b",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-06-29T15:43:56Z",
+      "side": 1,
+      "message": "Redundant? Given how truth is defined:\n\n  maven_jar(\n  name \u003d \u0027truth\u0027,\n  id \u003d \u0027com.google.truth:truth:0.26\u0027,\n  sha1 \u003d \u0027b5802815625d82f39c33219299771f3d64301b06\u0027,\n  license \u003d \u0027DO_NOT_DISTRIBUTE\u0027,\n  exported_deps \u003d [\n    \u0027:guava\u0027,\n    \u0027:junit\u0027,\n  ],\n  )",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "0afccbd14d7f917389050ee9a6ab9c1cea74b8c5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
