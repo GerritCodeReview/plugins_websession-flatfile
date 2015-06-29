@@ -22,6 +22,30 @@
       "revId": "0afccbd14d7f917389050ee9a6ab9c1cea74b8c5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53fe9d70_32b5f01e",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-06-29T16:01:20Z",
+      "side": 1,
+      "message": "I am working against 2.11 so this is required, as soon as this series of changes is merged, I will ask the maintainers to create stable-2.11 branch and I will submit a change to remove those 2 lines.",
+      "parentUuid": "f355d139_5737ac0b",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "0afccbd14d7f917389050ee9a6ab9c1cea74b8c5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
