@@ -14,10 +14,13 @@
 
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
+import static java.util.concurrent.TimeUnit.HOURS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.gerrit.httpd.WebSessionManager.Val;
 
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,17 +35,20 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 public class FlatFileWebSessionCacheTest {
 
   private static final int DEFAULT_KEYS_SIZE = 10;
+  private static final long MAX_AGE_MS = HOURS.toMillis(12);
 
   private FlatFileWebSessionCache flatFileWebSessionCache;
   private Path dir;
@@ -54,7 +60,7 @@ public class FlatFileWebSessionCacheTest {
     dir = Files.createTempDirectory("websessions");
     key = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
     existingKey = "aSceprtBc02YaMY573T5jfW64ZudJfPbDq";
-    flatFileWebSessionCache = new FlatFileWebSessionCache(dir);
+    flatFileWebSessionCache = new FlatFileWebSessionCache(dir, MAX_AGE_MS);
   }
 
   @Test
@@ -69,14 +75,16 @@ public class FlatFileWebSessionCacheTest {
   @Test
   public void constructorCreateDir() throws IOException {
     Path testtDir = Paths.get("tmp");
-    flatFileWebSessionCache = new FlatFileWebSessionCache(testtDir);
+    flatFileWebSessionCache = new FlatFileWebSessionCache(testtDir, MAX_AGE_MS);
     assertThat(Files.exists(testtDir)).isTrue();
     Files.deleteIfExists(testtDir);
   }
 
   @Test
   public void cleanUpTest() throws Exception {
+    createOutdatedCacheFiles();
     flatFileWebSessionCache.cleanUp();
+    assertThat(isDirEmpty(dir)).isTrue();
   }
 
   @Test
@@ -84,7 +92,8 @@ public class FlatFileWebSessionCacheTest {
     Files.createFile(dir.resolve(key));
     loadExistingKeyToCacheDir();
     List<String> keys = Arrays.asList(new String[] {key, existingKey});
-    assertThat(flatFileWebSessionCache.getAllPresent(keys)).containsKey(existingKey);
+    assertThat(flatFileWebSessionCache.getAllPresent(keys)).containsKey(
+        existingKey);
   }
 
   @Test
@@ -112,13 +121,15 @@ public class FlatFileWebSessionCacheTest {
         return null;
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
+        .isNull();
 
     loadExistingKeyToCacheDir();
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNotNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
+        .isNotNull();
   }
 
-  @Test(expected=ExecutionException.class)
+  @Test(expected = ExecutionException.class)
   public void getTestCallableThrowsException() throws Exception {
     class ValueLoader implements Callable<Val> {
       @Override
@@ -126,7 +137,8 @@ public class FlatFileWebSessionCacheTest {
         throw new Exception();
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
+        .isNull();
   }
 
   @Test
@@ -159,21 +171,21 @@ public class FlatFileWebSessionCacheTest {
   @Test
   public void putTest() throws Exception {
     loadExistingKeyToCacheDir();
-     Val val = flatFileWebSessionCache.getIfPresent(existingKey);
-     String newKey = "abcde12345";
-     flatFileWebSessionCache.put(newKey, val);
-     assertThat(flatFileWebSessionCache.getIfPresent(newKey)).isNotNull();
+    Val val = flatFileWebSessionCache.getIfPresent(existingKey);
+    String newKey = "abcde12345";
+    flatFileWebSessionCache.put(newKey, val);
+    assertThat(flatFileWebSessionCache.getIfPresent(newKey)).isNotNull();
   }
 
   @Test
   public void putAllTest() throws Exception {
     loadExistingKeyToCacheDir();
-     Val val = flatFileWebSessionCache.getIfPresent(existingKey);
-     String newKey = "abcde12345";
-     Map<String, Val> sessions = new HashMap<>();
-     sessions.put(newKey, val);
-     flatFileWebSessionCache.putAll(sessions);
-     assertThat(flatFileWebSessionCache.asMap()).containsKey(newKey);
+    Val val = flatFileWebSessionCache.getIfPresent(existingKey);
+    String newKey = "abcde12345";
+    Map<String, Val> sessions = new HashMap<>();
+    sessions.put(newKey, val);
+    flatFileWebSessionCache.putAll(sessions);
+    assertThat(flatFileWebSessionCache.asMap()).containsKey(newKey);
   }
 
   @Test
@@ -237,5 +249,15 @@ public class FlatFileWebSessionCacheTest {
 
   private InputStream loadFile(String file) {
     return this.getClass().getResourceAsStream("/" + file);
+  }
+
+  private void createOutdatedCacheFiles() throws IOException {
+    DateTime threshold = new DateTime().minus(MAX_AGE_MS * 3);
+    FileTime time = FileTime.fromMillis(threshold.getMillis());
+    for (int i = 0; i < 10; i++) {
+      Path path = dir.resolve(UUID.randomUUID().toString());
+      Files.createFile(path);
+      Files.setAttribute(path, "basic:lastAccessTime", time);
+    }
   }
 }
