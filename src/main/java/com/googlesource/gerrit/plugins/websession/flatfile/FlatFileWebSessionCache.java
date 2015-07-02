@@ -23,6 +23,7 @@ import com.google.gerrit.httpd.WebSessionManager.Val;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,9 +33,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.nio.file.DirectoryStream;
+import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,11 +54,14 @@ public class FlatFileWebSessionCache implements
   private static final Logger log = LoggerFactory
       .getLogger(FlatFileWebSessionCache.class);
 
+  private long maxAge;
   private final Path dir;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir Path dir) {
+  public FlatFileWebSessionCache(@WebSessionDir Path dir,
+      @WebSessionMaxAge long maxAge) {
     this.dir = dir;
+    this.maxAge = maxAge;
     if (Files.notExists(dir)) {
       log.info(dir + " not found. Creating it.");
       try {
@@ -80,8 +86,24 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public void cleanUp() {
-    // do nothing
+    DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() {
+      DateTime threshold = new DateTime().minus(maxAge);
+
+      @Override
+      public boolean accept(Path path) throws IOException {
+        BasicFileAttributes pathAttributes =
+            Files.readAttributes(path, BasicFileAttributes.class);
+        DateTime lastAccessTime =
+            new DateTime(pathAttributes.lastAccessTime().toMillis());
+        return lastAccessTime.isBefore(threshold);
+      }
+    };
+    List<Path> toDelete = listFiles(filter);
+    for (Path path : toDelete) {
+      deleteFile(path);
+    }
   }
+
 
   @Override
   public Val get(String key, Callable<? extends Val> valueLoader)
@@ -198,9 +220,20 @@ public class FlatFileWebSessionCache implements
     }
   }
 
-  private List<Path> listFiles() {
+  List<Path> listFiles() {
+    DirectoryStream.Filter<Path> all = new DirectoryStream.Filter<Path>() {
+      @Override
+      public boolean accept(Path path) throws IOException {
+        return true;
+      }
+    };
+    return listFiles(all);
+  }
+
+  private List<Path> listFiles(Filter<Path> filter) {
     List<Path> files = new ArrayList<>();
-    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir)) {
+    try (DirectoryStream<Path> dirStream =
+        Files.newDirectoryStream(dir, filter)) {
       for (Path path : dirStream) {
         files.add(path);
       }
