@@ -84,11 +84,19 @@ public class FlatFileWebSessionCacheTest {
   }
 
   @Test
+  public void cleanUpTest() throws Exception {
+    loadExistingKeyToCacheDir();
+    flatFileWebSessionCache.cleanUp();
+    assertThat(isDirEmpty(dir)).isTrue();
+  }
+
+  @Test
   public void getAllPresentTest() throws Exception {
     Files.createFile(dir.resolve(key));
     loadExistingKeyToCacheDir();
     List<String> keys = Arrays.asList(new String[] {key, existingKey});
-    assertThat(flatFileWebSessionCache.getAllPresent(keys)).containsKey(existingKey);
+    assertThat(flatFileWebSessionCache.getAllPresent(keys))
+        .containsKey(existingKey);
   }
 
   @Test
@@ -116,13 +124,15 @@ public class FlatFileWebSessionCacheTest {
         return null;
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
+        .isNull();
 
     loadExistingKeyToCacheDir();
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNotNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
+        .isNotNull();
   }
 
-  @Test(expected=ExecutionException.class)
+  @Test(expected = ExecutionException.class)
   public void getTestCallableThrowsException() throws Exception {
     class ValueLoader implements Callable<Val> {
       @Override
@@ -130,7 +140,8 @@ public class FlatFileWebSessionCacheTest {
         throw new Exception();
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
+        .isNull();
   }
 
   @Test
@@ -166,10 +177,10 @@ public class FlatFileWebSessionCacheTest {
   @Test
   public void putTest() throws Exception {
     loadExistingKeyToCacheDir();
-     Val val = flatFileWebSessionCache.getIfPresent(existingKey);
-     String newKey = "abcde12345";
-     flatFileWebSessionCache.put(newKey, val);
-     assertThat(flatFileWebSessionCache.getIfPresent(newKey)).isNotNull();
+    Val val = flatFileWebSessionCache.getIfPresent(existingKey);
+    String newKey = "abcde12345";
+    flatFileWebSessionCache.put(newKey, val);
+    assertThat(flatFileWebSessionCache.getIfPresent(newKey)).isNotNull();
   }
 
   @Test

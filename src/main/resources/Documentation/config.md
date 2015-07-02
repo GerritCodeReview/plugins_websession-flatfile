@@ -15,9 +15,33 @@ location defaults to $site_dir/websessions.
   # and in which rename operations are atomic and allow
   # overwriting of existing files
 ```
-
 Reload the plugin on each master for the changes to take
 effect.
+
+The plugin periodically clean up the cache directory, deleting
+files corresponding to expired sessions. The frequency of this
+operation can be specified in the configuration. For example:
++
+  [plugin "@PLUGIN@"]
+    cleanUpInterval = 1h
++
+indicates the clean up operation to be triggered evey hour.
++
+Values should use common unit suffixes to express their setting:
++
+* s, sec, second, seconds
+* m, min, minute, minutes
+* h, hr, hour, hours
+* d, day, days
+* w, week, weeks (`1 week` is treated as `7 days`)
+* mon, month, months (`1 month` is treated as `30 days`)
+* y, year, years (`1 year` is treated as `365 days`)
++
+If a unit suffix is not specified, `hours` is assumed.
++
+If 'cleanUpInterval' is not present in the configuration, the
+clean up operation is triggered every 24 hours.
+
 
 SEE ALSO
 --------
