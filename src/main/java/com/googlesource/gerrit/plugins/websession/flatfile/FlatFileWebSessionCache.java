@@ -23,6 +23,7 @@ import com.google.gerrit.httpd.WebSessionManager.Val;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,10 +53,13 @@ public class FlatFileWebSessionCache implements
       .getLogger(FlatFileWebSessionCache.class);
 
   private final Path dir;
+  private final long maxAge;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir Path dir) {
+  public FlatFileWebSessionCache(@WebSessionDir Path dir,
+      @WebSessionMaxAge long maxAge) {
     this.dir = dir;
+    this.maxAge = maxAge;
     if (Files.notExists(dir)) {
       log.info(dir + " not found. Creating it.");
       try {
@@ -80,7 +84,13 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public void cleanUp() {
-    // do nothing
+    for (Path path : listFiles()) {
+      Val val = readFile(path);
+      DateTime expires = new DateTime(val.getExpiresAt());
+      if (expires.isBefore(new DateTime().minus(maxAge * 2))) {
+        deleteFile(path);
+      }
+    }
   }
 
   @Override
@@ -149,7 +159,8 @@ public class FlatFileWebSessionCache implements
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
         Files.move(tempFile, tempFile.resolveSibling(key),
-            StandardCopyOption.REPLACE_EXISTING);
+            StandardCopyOption.REPLACE_EXISTING,
+            StandardCopyOption.ATOMIC_MOVE);
       }
     } catch (IOException e) {
       log.warn("Cannot put into cache " + dir, e);
