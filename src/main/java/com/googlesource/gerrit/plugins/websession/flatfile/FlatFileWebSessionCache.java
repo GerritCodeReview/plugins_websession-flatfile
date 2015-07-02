@@ -23,6 +23,7 @@ import com.google.gerrit.httpd.WebSessionManager.Val;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +81,13 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public void cleanUp() {
-    // do nothing
+    for (Path path : listFiles()) {
+      Val val = readFile(path);
+      DateTime expires = new DateTime(val.getExpiresAt());
+      if (expires.isBefore(new DateTime())) {
+        deleteFile(path);
+      }
+    }
   }
 
   @Override
@@ -149,7 +156,8 @@ public class FlatFileWebSessionCache implements
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
         Files.move(tempFile, tempFile.resolveSibling(key),
-            StandardCopyOption.REPLACE_EXISTING);
+            StandardCopyOption.REPLACE_EXISTING,
+            StandardCopyOption.ATOMIC_MOVE);
       }
     } catch (IOException e) {
       log.warn("Cannot put into cache " + dir, e);
