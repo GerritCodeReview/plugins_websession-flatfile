@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
-import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.annotations.RootRelative;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.httpd.CacheBasedWebSession;
@@ -23,18 +22,11 @@ import com.google.gerrit.httpd.WebSessionManagerFactory;
 import com.google.gerrit.server.AnonymousUser;
 import com.google.gerrit.server.IdentifiedUser.RequestFactory;
 import com.google.gerrit.server.config.AuthConfig;
-import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.ServletScopes;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,15 +40,6 @@ public class FlatFileWebSession extends CacheBasedWebSession {
       bindScope(RequestScoped.class, ServletScopes.REQUEST);
       DynamicItem.bind(binder(), WebSession.class)
           .to(FlatFileWebSession.class).in(RequestScoped.class);
-    }
-
-    @Provides
-    @Singleton
-    @WebSessionDir
-    Path getWebSessionDir(SitePaths site, PluginConfigFactory cfg,
-        @PluginName String pluginName) {
-      return Paths.get(cfg.getFromGerritConfig(pluginName).getString(
-          "directory", site.site_path + "/websessions"));
     }
   }
 
