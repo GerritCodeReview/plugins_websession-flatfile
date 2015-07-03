@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "33e3e94b_e12cc6d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-03T17:59:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e3e94b_a132be2b",
+      "revId": "4f7335bae28e8d4b6b0ba0e8071e53fe7f0083a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7353a1ca_236ceafc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-03T17:39:22Z",
       "side": 1,
       "message": "extra empty line",
+      "revId": "4f7335bae28e8d4b6b0ba0e8071e53fe7f0083a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33e3e94b_4122d2dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-03T17:59:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7353a1ca_236ceafc",
       "revId": "4f7335bae28e8d4b6b0ba0e8071e53fe7f0083a0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
