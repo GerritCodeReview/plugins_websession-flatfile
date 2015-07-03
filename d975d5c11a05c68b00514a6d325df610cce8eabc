@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33e3e94b_41fbf2b7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-07-03T16:35:48Z",
+      "side": 1,
+      "message": "missing license header",
+      "revId": "d975d5c11a05c68b00514a6d325df610cce8eabc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
