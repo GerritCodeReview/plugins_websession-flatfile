@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7353a1ca_0378ce9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-07-06T13:19:57Z",
+      "side": 1,
+      "message": "Forget my comment, lines are not exceeding 72.",
+      "parentUuid": "7353a1ca_e38ed237",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 35
+      },
+      "revId": "3ab9c9d4acfa4ce56716568e8fffd38ee58fb3da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33e3e94b_81469a70",
         "filename": "BUCK",
         "patchSetId": 3
