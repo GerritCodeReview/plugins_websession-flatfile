@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7353a1ca_e38ed237",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-07-06T13:12:52Z",
+      "side": 1,
+      "message": "In the commit message, lines should not exceed 72 chars",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 35
+      },
+      "revId": "3ab9c9d4acfa4ce56716568e8fffd38ee58fb3da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33e3e94b_81469a70",
+        "filename": "BUCK",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-07-06T13:12:52Z",
+      "side": 1,
+      "message": "this must be added tot the java_test rule, otherwise the tests are not compiling.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "3ab9c9d4acfa4ce56716568e8fffd38ee58fb3da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7353a1ca_83835e0e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-07-06T13:12:52Z",
+      "side": 1,
+      "message": "remove empty line",
+      "revId": "3ab9c9d4acfa4ce56716568e8fffd38ee58fb3da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
