@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "132d0577_28c6cb8b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T01:09:54Z",
+      "side": 1,
+      "message": "I don\u0027t think this does anything without having a proposition method call.  In this case it should probably be `isTrue()`.",
+      "range": {
+        "startLine": 149,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 43
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "132d0577_48d3ff48",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T01:09:54Z",
+      "side": 1,
+      "message": "Same here.\n\nAnd maybe for clarity change `notExists()` to `exists()` and use the `isFalse` preposition.",
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "333689c8_69d0c53b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T01:09:54Z",
+      "side": 1,
+      "message": "No assertions necessary after this call?",
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "132d0577_68d0c33b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T01:09:54Z",
+      "side": 1,
+      "message": "Can this assignment be inlined in the instantiation on the previous line?",
+      "range": {
+        "startLine": 174,
+        "startChar": 5,
+        "endLine": 174,
+        "endChar": 31
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "132d0577_88db375f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T01:09:54Z",
+      "side": 1,
+      "message": "Is it possible to use `hasSize` here?  I.e.:\n\n assertThat(flatFileWebSessionCache).hasSize(DEFAULT_KEYS_SIZE)",
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "132d0577_a8e0fb0f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T01:09:54Z",
+      "side": 1,
+      "message": "We usually put this up at the top next to the @Before annotated method.",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 197,
+        "endChar": 3
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
