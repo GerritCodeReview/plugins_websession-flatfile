@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "333689c8_a932bd2b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-07T13:38:01Z",
+      "side": 1,
+      "message": "I meant something like:\n\n Map\u003cString, Val\u003e sessions \u003d ImmutableMap.of(newKey, Val);",
+      "parentUuid": "98059200_7cdd3951",
+      "range": {
+        "startLine": 174,
+        "startChar": 5,
+        "endLine": 174,
+        "endChar": 31
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "132d0577_88db375f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 6
