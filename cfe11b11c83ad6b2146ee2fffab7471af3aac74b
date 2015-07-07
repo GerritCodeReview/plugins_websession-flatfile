@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "98059200_fcc70988",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-07T13:17:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "132d0577_28c6cb8b",
+      "range": {
+        "startLine": 149,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 43
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "132d0577_48d3ff48",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 6
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "b8f6d649_fdc70788",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-07T13:17:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "132d0577_48d3ff48",
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "333689c8_69d0c53b",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 6
@@ -53,6 +95,24 @@
       "writtenOn": "2015-07-07T01:09:54Z",
       "side": 1,
       "message": "No assertions necessary after this call?",
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8f6d649_7ddd3751",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-07T13:17:38Z",
+      "side": 1,
+      "message": "Well, the idea here is to test the other branch of the conditional, i.e., when the object passed to the method is not an String. In that case, the method does nothing and that\u0027s why I\u0027m not asserting anything.",
+      "parentUuid": "333689c8_69d0c53b",
       "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "98059200_7cdd3951",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-07T13:17:38Z",
+      "side": 1,
+      "message": "The problem is, the put method returns a Val type (the V part of the K,V pair), so it\u0027s not compatible with the assignment.",
+      "parentUuid": "132d0577_68d0c33b",
+      "range": {
+        "startLine": 174,
+        "startChar": 5,
+        "endLine": 174,
+        "endChar": 31
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "132d0577_88db375f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 6
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "98059200_9ccec5a0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-07T13:17:38Z",
+      "side": 1,
+      "message": "Not really, flatFileWebSessionCache does not have any collection member and it just overrides the Cache\u0027s interface size() method which, in that case, returns the cache\u0027s directory size (an integer). So, hasSize() cannot be used here, even if I agree it will be clearer to read.",
+      "parentUuid": "132d0577_88db375f",
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "132d0577_a8e0fb0f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 6
@@ -110,6 +212,30 @@
       "writtenOn": "2015-07-07T01:09:54Z",
       "side": 1,
       "message": "We usually put this up at the top next to the @Before annotated method.",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 197,
+        "endChar": 3
+      },
+      "revId": "cfe11b11c83ad6b2146ee2fffab7471af3aac74b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8f6d649_ddc44b86",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-07T13:17:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "132d0577_a8e0fb0f",
       "range": {
         "startLine": 190,
         "startChar": 2,
