@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d3082cc_e78a2224",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1018662
+      },
+      "writtenOn": "2015-07-29T14:36:00Z",
+      "side": 1,
+      "message": "nit: testDir",
+      "range": {
+        "startLine": 80,
+        "startChar": 9,
+        "endLine": 80,
+        "endChar": 17
+      },
+      "revId": "50173f459683bf96f270d499b1b0df0f75a92134",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d3082cc_a7902a58",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 7
