@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0d3082cc_e7094239",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-29T16:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd382ab3_8dfa6184",
+      "range": {
+        "startLine": 12,
+        "startChar": 52,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "2e77446c5f9e0b28218ab22bc35406aa692266d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d3082cc_0799f688",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2015-07-29T14:24:02Z",
       "side": 1,
       "message": "No utter need for final here to my knowledge.",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "2e77446c5f9e0b28218ab22bc35406aa692266d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d3082cc_87fa4684",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-29T16:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3082cc_0799f688",
       "range": {
         "startLine": 32,
         "startChar": 21,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0d3082cc_a7ff4a73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-29T16:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3082cc_2796fa57",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 13
+      },
+      "revId": "2e77446c5f9e0b28218ab22bc35406aa692266d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d3082cc_47a3eeb0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 6
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "0d3082cc_c7043e22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-29T16:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3082cc_47a3eeb0",
+      "revId": "2e77446c5f9e0b28218ab22bc35406aa692266d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d3082cc_67a0f2a3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 6
@@ -99,6 +189,30 @@
       "writtenOn": "2015-07-29T14:24:02Z",
       "side": 1,
       "message": "Can go to end of line 48.",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 20
+      },
+      "revId": "2e77446c5f9e0b28218ab22bc35406aa692266d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd382ab3_6d161557",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-07-29T16:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3082cc_67a0f2a3",
       "range": {
         "startLine": 49,
         "startChar": 8,
