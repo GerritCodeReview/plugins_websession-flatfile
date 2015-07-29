@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d3082cc_a7902a58",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-07-29T14:33:05Z",
+      "side": 1,
+      "message": "No assert of some sort? Maybe the code under test is not testable enough then; would revisit it.",
+      "revId": "50173f459683bf96f270d499b1b0df0f75a92134",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
