@@ -1,0 +1,26 @@
+include_defs('//bucklets/maven_jar.bucklet')
+
+maven_jar(
+  name = 'guava',
+  id = 'com.google.guava:guava:19.0-rc1',
+  sha1 = '0364538ac107b8943a1f4d68ac50f1b0421bb983',
+  license = 'Apache2.0',
+)
+
+maven_jar(
+  name = 'junit',
+  id = 'junit:junit:4.11',
+  sha1 = '4e031bb61df09069aeb2bffb4019e7a5034a4ee0',
+  license = 'DO_NOT_DISTRIBUTE',
+)
+
+maven_jar(
+  name = 'truth',
+  id = 'com.google.truth:truth:0.27',
+  sha1 = 'bd17774d2dc0fffa884d42c07d2537e86c67acd6',
+  license = 'DO_NOT_DISTRIBUTE',
+  exported_deps = [
+    ':guava',
+    ':junit',
+  ],
+)
