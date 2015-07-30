@@ -1,6 +1,8 @@
-/lib
-/target
-/.classpath
-/.settings
-/.project
-
+buck-out/
+bucklets
+target/
+.buckversion
+.classpath
+.project
+.settings/
+.watchmanconfig
