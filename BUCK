@@ -1,7 +1,22 @@
+include_defs('//bucklets/gerrit_plugin.bucklet')
+include_defs('//bucklets/java_sources.bucklet')
+
+SOURCES = glob(['src/main/java/**/*.java'])
+RESOURCES = glob(['src/main/resources/**/*'])
+
+PROVIDED_DEPS = [
+  '//lib/joda:joda-time',
+]
+
+TEST_DEPS = GERRIT_PLUGIN_API + [
+  ':websession-flatfile__plugin',
+  '//lib:truth',
+]
+
 gerrit_plugin(
   name = 'websession-flatfile',
-  srcs = glob(['src/main/java/**/*.java']),
-  resources = glob(['src/main/resources/**/*']),
+  srcs = SOURCES,
+  resources = RESOURCES,
   manifest_entries = [
     'Gerrit-PluginName: websession-flatfile',
     'Gerrit-Module: com.googlesource.gerrit.plugins.websession.flatfile.Module',
@@ -9,9 +24,17 @@ gerrit_plugin(
     'Implementation-Title: Flat file WebSession',
     'Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/websession-flatfile',
   ],
-  provided_deps = [
-    '//lib/joda:joda-time',
-  ],
+  provided_deps = PROVIDED_DEPS,
+)
+
+java_library(
+  name = 'classpath',
+  deps = list(set(PROVIDED_DEPS) | set(TEST_DEPS))
+)
+
+java_sources(
+  name = 'websession-flatfile-sources',
+  srcs = SOURCES + RESOURCES,
 )
 
 java_test(
@@ -20,11 +43,5 @@ java_test(
   resources = glob(['src/test/resources/**/']),
   labels = ['websession-flatfile'],
   source_under_test = [':websession-flatfile__plugin'],
-  deps = [
-    ':websession-flatfile__plugin',
-    '//gerrit-httpd:httpd',
-    '//lib:guava',
-    '//lib:junit',
-    '//lib:truth',
-  ],
+  deps = TEST_DEPS,
 )
