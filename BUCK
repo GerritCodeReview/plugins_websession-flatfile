@@ -1,12 +1,33 @@
+include_defs('//bucklets/gerrit_plugin.bucklet')
+include_defs('//bucklets/java_sources.bucklet')
+
+SOURCES = glob(['src/main/java/**/*.java'])
+RESOURCES = glob(['src/main/resources/**/*'])
+
+DEPS = GERRIT_PLUGIN_API + [
+  ':websession-flatfile__plugin',
+]
+
 gerrit_plugin(
   name = 'websession-flatfile',
-  srcs = glob(['src/main/java/**/*.java']),
-  resources = glob(['src/main/resources/**/*']),
+  srcs = SOURCES,
+  resources = RESOURCES,
   manifest_entries = [
     'Gerrit-PluginName: websession-flatfile',
     'Gerrit-HttpModule: com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSession$Module',
     'Implementation-Title: Flat file WebSession',
-    'Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/websession-flatfile',  ]
+    'Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/websession-flatfile',
+  ],
+)
+
+java_library(
+  name = 'classpath',
+  deps = DEPS,
+)
+
+java_sources(
+  name = 'websession-flatfile-sources',
+  srcs = SOURCES + RESOURCES,
 )
 
 java_test(
@@ -14,12 +35,6 @@ java_test(
   srcs = glob(['src/test/java/**/*.java']),
   resources = glob(['src/test/resources/**/']),
   labels = ['websession-flatfile'],
+  deps = DEPS,
   source_under_test = [':websession-flatfile__plugin'],
-  deps = [
-    ':websession-flatfile__plugin',
-    '//gerrit-httpd:httpd',
-    '//lib:guava',
-    '//lib:junit',
-    '//lib:truth',
-  ],
 )
