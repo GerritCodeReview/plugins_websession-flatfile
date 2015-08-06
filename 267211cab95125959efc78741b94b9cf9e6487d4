@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ca701052_4dc6f990",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-06T17:13:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6afe4471_323fb0e6",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 11
+      },
+      "revId": "267211cab95125959efc78741b94b9cf9e6487d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aafbdc84_8c664719",
         "filename": ".gitignore",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-08-04T20:15:55Z",
       "side": 1,
       "message": "Would move one line up if alpha-sorting.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 8
+      },
+      "revId": "267211cab95125959efc78741b94b9cf9e6487d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca701052_6dc3b57f",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-06T17:13:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aafbdc84_8c664719",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2a09acaf_e8da1360",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-06T17:13:44Z",
+      "side": 1,
+      "message": "The test need access to some types defined in gerrit core, so we need this dependency.",
+      "parentUuid": "6afe4471_92665c19",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "267211cab95125959efc78741b94b9cf9e6487d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aafbdc84_ec738bd9",
         "filename": "src/main/resources/Documentation/build.md",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4a1260d9_49ec8100",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-06T17:13:44Z",
+      "side": 1,
+      "message": "Right, but the alias is defined in .buckconfig and, thanks to your comments, .buckconfig is no longer ignored by git.",
+      "parentUuid": "aafbdc84_ec738bd9",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 19
+      },
+      "revId": "267211cab95125959efc78741b94b9cf9e6487d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6afe4471_d270e4cf",
         "filename": "src/main/resources/Documentation/build.md",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2015-08-04T20:15:55Z",
       "side": 1,
       "message": "Needed? Think not.",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 84,
+        "endChar": 17
+      },
+      "revId": "267211cab95125959efc78741b94b9cf9e6487d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a09acaf_c8df4f4e",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-06T17:13:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6afe4471_d270e4cf",
       "range": {
         "startLine": 84,
         "startChar": 12,
