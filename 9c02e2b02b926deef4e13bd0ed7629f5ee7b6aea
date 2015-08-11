@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87a61326_cbbf15f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-08-11T20:08:44Z",
+      "side": 1,
+      "message": "I don\u0027t think this was a good fix.  The deleteFile() method should not silently fail if the file doesn\u0027t exist, it would be better to have prevented this method from being called if the rename succeeded.",
+      "range": {
+        "startLine": 229,
+        "startChar": 15,
+        "endLine": 229,
+        "endChar": 25
+      },
+      "revId": "9c02e2b02b926deef4e13bd0ed7629f5ee7b6aea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
