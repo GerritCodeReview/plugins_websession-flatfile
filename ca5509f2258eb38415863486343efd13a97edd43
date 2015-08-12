@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e778af71_f6bf40f6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-12T14:08:13Z",
+      "side": 1,
+      "message": "Only when called explicitly. For sure, this call is made periodically in order to ensure websession folder keeps a sensible size.",
+      "parentUuid": "87a61326_0bc2bd7b",
+      "range": {
+        "startLine": 88,
+        "startChar": 14,
+        "endLine": 88,
+        "endChar": 21
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8711b30b_93dc3c5b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-08-11T21:00:16Z",
       "side": 1,
       "message": "Would it be better to use lastModified and ensure that lastModified is updated whenever it is accessed after more than 1/2 of maxAge (if it is not already)?  My concern is that I suspect people may want to mount the FS where this is located with noatime, especially if it is on a shared NFS server, for performance.",
+      "range": {
+        "startLine": 97,
+        "startChar": 40,
+        "endLine": 97,
+        "endChar": 54
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e726ef9b_a6b5861a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-12T14:08:13Z",
+      "side": 1,
+      "message": "Very true indeed. But why don\u0027t just modify this attribute any time the file is read? That way we just mimic the lastAccessTime attribute without the risk associated with the noatime switch. I\u0027m not sure, however, about the scalability of this, giving that we need to access and modify file attributes every time a file is read. Having thousands of users, could this have a negative impact on performance?",
+      "parentUuid": "8711b30b_93dc3c5b",
       "range": {
         "startLine": 97,
         "startChar": 40,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e726ef9b_c6ba8209",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-12T14:08:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87a61326_6bcf01a4",
+      "range": {
+        "startLine": 222,
+        "startChar": 2,
+        "endLine": 222,
+        "endChar": 6
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8711b30b_f3d13041",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "e778af71_76cc10ae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-12T14:08:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8711b30b_f3d13041",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 228,
+        "endChar": 6
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8711b30b_d3d6b436",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2015-08-11T21:00:16Z",
       "side": 1,
       "message": "This already exists as a constant in Gerrit:\n\n CacheBasedWebSession.MAX_AGE_MINUTES\n\nYou should probably use that (make it public first if needed).\n\nHowever, there is another constant that you should probably use instead of even using that.  If you expose WebSessionManager.sessionMaxAgeMillis somehow, it seems to be the same thing you wnat on line 57.  Maybe move that to GerritServerConfig somehow so that you can share this?",
+      "range": {
+        "startLine": 37,
+        "startChar": 28,
+        "endLine": 37,
+        "endChar": 38
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e778af71_96d7ec35",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-08-12T14:08:13Z",
+      "side": 1,
+      "message": "Agree the second one is a better solution. However, for the moment I\u0027d take the first option (easier) because right now I\u0027m a bit busy with another plug in. Will push a new change later to fix this more elegantly.",
+      "parentUuid": "8711b30b_d3d6b436",
       "range": {
         "startLine": 37,
         "startChar": 28,
