@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "443979cf_f1c3a87f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-08-12T15:29:25Z",
+      "side": 1,
+      "message": "The more I think about it, I think we might be taking the wrong approach here.  I think that the WebSession framework already has some of these concepts built in.  Doesn\u0027t it update the session\u0027s access time already based on a 1/2 maxage time?  If so, then that data should be in the files and we should be using that instead of the file ages themselves?",
+      "parentUuid": "e726ef9b_a6b5861a",
+      "range": {
+        "startLine": 97,
+        "startChar": 40,
+        "endLine": 97,
+        "endChar": 54
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87a61326_6bcf01a4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 2
