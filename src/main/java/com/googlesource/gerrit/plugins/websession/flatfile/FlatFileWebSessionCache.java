@@ -149,7 +149,8 @@ public class FlatFileWebSessionCache implements
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
         Files.move(tempFile, tempFile.resolveSibling(key),
-            StandardCopyOption.REPLACE_EXISTING);
+            StandardCopyOption.REPLACE_EXISTING,
+            StandardCopyOption.ATOMIC_MOVE);
       }
     } catch (IOException e) {
       log.warn("Cannot put into cache " + dir, e);
