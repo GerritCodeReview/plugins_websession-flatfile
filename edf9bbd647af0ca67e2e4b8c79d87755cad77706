@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "096b1b6b_6ae877e9",
+        "filename": "lib/gerrit/BUCK",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-09-23T06:38:51Z",
+      "side": 1,
+      "message": "Adding here this line:\n\n  exclude \u003d [\u0027META-INF/MANIFEST.MF\u0027, \u0027LICENSE.txt\u0027, \u0027README.txt\u0027],\n\nfixes the `buck test` for me. I think something going wrong with shaded plugin-api.jar on recent master.",
+      "revId": "edf9bbd647af0ca67e2e4b8c79d87755cad77706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "096b1b6b_cad64331",
         "filename": "lib/joda/BUCK",
         "patchSetId": 9
