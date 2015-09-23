@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "096b1b6b_8ad04b34",
+        "filename": "BUCK",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-09-23T05:29:57Z",
+      "side": 1,
+      "message": "This still has a lot unneded dependency and the rules are overspecified. I exported joda-time in Gerrit and was able to remove all deps. Here is my seggestion, as diff to this version: [1].\n\n* [1] http://paste.openstack.org/show/473694",
+      "revId": "edf9bbd647af0ca67e2e4b8c79d87755cad77706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9e24745_c1d6e230",
+        "filename": "BUCK",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-09-23T05:29:57Z",
+      "side": 1,
+      "message": "Don\u0027t have time to investigate it atm, but the tests are failing for me with: [1].\n\n* [1] http://paste.openstack.org/show/473693",
+      "revId": "edf9bbd647af0ca67e2e4b8c79d87755cad77706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9e24745_61c9d68e",
+        "filename": "lib/BUCK",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-09-23T05:29:57Z",
+      "side": 1,
+      "message": "All this is already included in the Plugin API. Remove it.",
+      "revId": "edf9bbd647af0ca67e2e4b8c79d87755cad77706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "096b1b6b_cad64331",
+        "filename": "lib/joda/BUCK",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-09-23T05:29:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be needed after my core change wasmerged.",
+      "revId": "edf9bbd647af0ca67e2e4b8c79d87755cad77706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "096b1b6b_eadb0756",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-09-23T05:29:57Z",
+      "side": 1,
+      "message": "Add a section how to build sources?\n\n  buck build src",
+      "revId": "edf9bbd647af0ca67e2e4b8c79d87755cad77706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
