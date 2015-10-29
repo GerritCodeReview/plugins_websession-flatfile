@@ -16,6 +16,24 @@
       "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16d7c97f_6ad7f721",
+        "filename": "BUCK",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-10-29T14:16:58Z",
+      "side": 1,
+      "message": "Well, this plugin does not have IT tests (not yet) and existing tests are passing OK now. Do we need it?",
+      "parentUuid": "b6ba7d35_6fb8b1ac",
+      "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
