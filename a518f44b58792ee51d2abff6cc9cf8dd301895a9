@@ -69,6 +69,24 @@
       "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16d7c97f_aaf1efc8",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-10-29T14:56:12Z",
+      "side": 1,
+      "message": "Using buck 7e153d4a69044 (latest, as far as I know) it still creates the jar directly below the buck-out/gen folder in standalone mode. In the tree, it is created in buck-out/gen/plugins/@PLUGIN@/@PLUGIN@.jar\n\nAny difference in your side?",
+      "parentUuid": "b6ba7d35_8fe7d5c3",
+      "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
