@@ -87,6 +87,24 @@
       "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6b07555_51a7547e",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-10-29T19:10:24Z",
+      "side": 1,
+      "message": "Thanks. I confused base path difference in tree and standalone build (that is reflected in gen directory):\n\n  $ buck targets --json //plugins/websession-flatfile:websession-flatfile | grep buck.base_path\n  \"buck.base_path\" : \"plugins/websession-flatfile\",\n  $ buck targets --json plugin\n  \"buck.base_path\" : \"\",",
+      "parentUuid": "16d7c97f_aaf1efc8",
+      "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
