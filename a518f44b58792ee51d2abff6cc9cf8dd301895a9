@@ -34,6 +34,41 @@
       "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6b07555_11d4accc",
+        "filename": "BUCK",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-10-29T14:38:47Z",
+      "side": 1,
+      "message": "Nope. Should be fine then.",
+      "parentUuid": "16d7c97f_6ad7f721",
+      "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6ba7d35_8fe7d5c3",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-10-29T14:38:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be buck-out/gen/@PLUGIN@/@PLUGIN@.jar on newest Buck version we are using?",
+      "revId": "a518f44b58792ee51d2abff6cc9cf8dd301895a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
