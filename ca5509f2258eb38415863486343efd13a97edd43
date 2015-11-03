@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "24f6469e_6bb94102",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-03T22:52:29Z",
+      "side": 1,
+      "message": "How do you know that this does not get called at other times?  The cleanup() method is part of the Cache interface, couldn\u0027t the CacheManager potentially call this at other times?",
+      "parentUuid": "e778af71_f6bf40f6",
+      "range": {
+        "startLine": 88,
+        "startChar": 14,
+        "endLine": 88,
+        "endChar": 21
+      },
+      "revId": "ca5509f2258eb38415863486343efd13a97edd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8711b30b_93dc3c5b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 2
