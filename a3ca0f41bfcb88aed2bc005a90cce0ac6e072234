@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "96f2da53_c001fe48",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/CleanUpInterval.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_cdbc898a",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_ada25d66",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
         "patchSetId": 10
@@ -36,6 +60,24 @@
       "writtenOn": "2015-11-03T12:17:44Z",
       "side": 1,
       "message": "nit: for constructors annotated with @Inject we usually list each argument on a separate line.",
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9659fa47_88fe7785",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_ada25d66",
       "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "9659fa47_c8046f5b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Yes, if it\u0027s not there I\u0027m getting a compiler error.",
+      "parentUuid": "3625aea9_cd95a900",
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_edbf457c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 10
@@ -70,6 +130,30 @@
       "writtenOn": "2015-11-03T12:17:44Z",
       "side": 1,
       "message": "Cleanup",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 17
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96f2da53_400e0e7f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_edbf457c",
       "range": {
         "startLine": 54,
         "startChar": 10,
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "9659fa47_a8013b49",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_0dcbb125",
+      "range": {
+        "startLine": 57,
+        "startChar": 13,
+        "endLine": 57,
+        "endChar": 20
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d65ff225_2ac65f1d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 10
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "96f2da53_20130aa7",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d65ff225_2ac65f1d",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 29
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d65ff225_0acb9b25",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 10
@@ -139,6 +271,30 @@
       "writtenOn": "2015-11-03T12:17:44Z",
       "side": 1,
       "message": "cleanup",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 11
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9659fa47_e84e13bb",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d65ff225_0acb9b25",
       "range": {
         "startLine": 30,
         "startChar": 4,
@@ -197,6 +353,54 @@
     },
     {
       "key": {
+        "uuid": "9659fa47_683b431e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_6dcc753f",
+      "range": {
+        "startLine": 33,
+        "startChar": 49,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96f2da53_0008066d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_8d9fa11e",
+      "range": {
+        "startLine": 33,
+        "startChar": 14,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_4dd1b9d5",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 10
@@ -208,6 +412,30 @@
       "writtenOn": "2015-11-03T12:17:44Z",
       "side": 1,
       "message": "time unit",
+      "range": {
+        "startLine": 35,
+        "startChar": 25,
+        "endLine": 35,
+        "endChar": 29
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9659fa47_48407f88",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_4dd1b9d5",
       "range": {
         "startLine": 35,
         "startChar": 25,
@@ -243,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "9659fa47_28454b98",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d65ff225_eabf277c",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_2dc66d1d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 10
@@ -266,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "96f2da53_e004025b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3625aea9_2dc66d1d",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d65ff225_cabc638a",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 10
@@ -277,6 +553,30 @@
       "writtenOn": "2015-11-03T12:17:44Z",
       "side": 1,
       "message": "cleanup",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 8
+      },
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9659fa47_084a87a8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-03T14:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d65ff225_cabc638a",
       "range": {
         "startLine": 48,
         "startChar": 0,
