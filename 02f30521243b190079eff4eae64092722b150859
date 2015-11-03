@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b62a7ebd_09a409c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-03T22:52:29Z",
+      "side": 1,
+      "message": "I am curious why the Gerrit Websession manager does not already call the cleanup() method regularly?  It seems like the H2Cache implementation would suffer from a similar garbage build up if it is not being cleaned up regularly?",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "02f30521243b190079eff4eae64092722b150859",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d627f2f2_8aaf4ba2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-03T22:52:29Z",
+      "side": 1,
+      "message": "It might make more sense to have this auto adjust itself based on the expiry time?  Maybe make it half the expiry time?",
+      "range": {
+        "startLine": 48,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 36
+      },
+      "revId": "02f30521243b190079eff4eae64092722b150859",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
