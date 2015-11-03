@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44fb3a86_4cbe1fec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-03T22:52:29Z",
+      "side": 1,
+      "message": "Why do you need to do anothing with maxAge here?  I think expires gets updated on use, so if the expires is before now, why not delete it right away?",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24f6469e_0bb4fd09",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-03T22:52:29Z",
+      "side": 1,
+      "message": "Would it make more sense to call invalidate here?",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 18
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44fb3a86_6cb95b02",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-03T22:52:29Z",
+      "side": 1,
+      "message": "Unrelated to this change?  If this is a bug fix, it should probably go in its own change.",
+      "range": {
+        "startLine": 163,
+        "startChar": 31,
+        "endLine": 163,
+        "endChar": 42
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
