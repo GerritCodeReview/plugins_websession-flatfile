@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "76564647_17cb7477",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T18:02:25Z",
+      "side": 1,
+      "message": "For what I see now (just a quick look), H2Cache is not implementing the cleanUp() method, but yes, it could be an option to improve this",
+      "parentUuid": "b62a7ebd_09f249c7",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "02f30521243b190079eff4eae64092722b150859",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d627f2f2_8aaf4ba2",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 11
