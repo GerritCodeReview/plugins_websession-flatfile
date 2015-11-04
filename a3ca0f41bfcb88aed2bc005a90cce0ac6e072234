@@ -155,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "967d7aef_089fc776",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-04T18:18:46Z",
+      "side": 1,
+      "message": "Yes.  I don\u0027t think we have a rule.  I tend to make my decision based on context.  In this case, the plugin has a very limited context, and using an unqualified CleanerLifecycle (as you have done) is likely more appropriate, and unconfusing.  But either would work.",
+      "parentUuid": "f6f6b69c_4bc5655e",
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_edbf457c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 10
