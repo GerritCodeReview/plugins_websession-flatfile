@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f6f6b69c_6ba941a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T11:29:45Z",
+      "side": 1,
+      "message": "Done in later patch sets. Please see latest one.",
+      "parentUuid": "44fb3a86_4cbe1fec",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24f6469e_0bb4fd09",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f6f6b69c_4bae05aa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T11:29:45Z",
+      "side": 1,
+      "message": "Invalidate call deleteFile(), so the end result is the same. We could use invalidate here but we would need to convert Path to String (a simple toString() would do it) and after invalidate would have to \"convert\" (resolve) String to Path, so I wonder if that it\u0027s a good idea.",
+      "parentUuid": "24f6469e_0bb4fd09",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 18
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44fb3a86_6cb95b02",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2015-11-03T22:52:29Z",
       "side": 1,
       "message": "Unrelated to this change?  If this is a bug fix, it should probably go in its own change.",
+      "range": {
+        "startLine": 163,
+        "startChar": 31,
+        "endLine": 163,
+        "endChar": 42
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76564647_b7b2880a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T11:29:45Z",
+      "side": 1,
+      "message": "In fact, by the moment this patch set was pushed, this fix had already been merged, so it\u0027s just that this change was rebased on top of the current master.",
+      "parentUuid": "44fb3a86_6cb95b02",
       "range": {
         "startLine": 163,
         "startChar": 31,
