@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b62a7ebd_09f249c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-04T15:55:11Z",
+      "side": 1,
+      "message": "My main reason for asking is because I am wondering if this periodic cleanUp()  call shouldn\u0027t be moved to gerrit core itself (if the H2cache could use it too)?",
+      "parentUuid": "f6f6b69c_abb2090a",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "02f30521243b190079eff4eae64092722b150859",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d627f2f2_8aaf4ba2",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 11
