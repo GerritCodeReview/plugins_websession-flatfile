@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "f6f6b69c_4bc5655e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T18:02:25Z",
+      "side": 1,
+      "message": "OK, thanks. So we could eventually get rid of this import and just fully qualify the class, so, which one could be cleaner?",
+      "parentUuid": "d627f2f2_2a145f8f",
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_edbf457c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 10
