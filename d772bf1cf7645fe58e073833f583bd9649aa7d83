@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d627f2f2_eaea47c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-04T15:55:11Z",
+      "side": 1,
+      "message": "Sorry, I think this published some really old comments of mine yesterday.  Does \"publish\" now publish old patchsets also?",
+      "parentUuid": "f6f6b69c_6ba941a0",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24f6469e_0bb4fd09",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 3
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "b62a7ebd_29ed8de7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-04T15:55:11Z",
+      "side": 1,
+      "message": "Yes, sorry about the old out-of-date comment (see above)",
+      "parentUuid": "f6f6b69c_4bae05aa",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 18
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44fb3a86_6cb95b02",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 3
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "In fact, by the moment this patch set was pushed, this fix had already been merged, so it\u0027s just that this change was rebased on top of the current master.",
       "parentUuid": "44fb3a86_6cb95b02",
+      "range": {
+        "startLine": 163,
+        "startChar": 31,
+        "endLine": 163,
+        "endChar": 42
+      },
+      "revId": "d772bf1cf7645fe58e073833f583bd9649aa7d83",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d627f2f2_cae783fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-04T15:55:11Z",
+      "side": 1,
+      "message": "My bad, old out-of-date comment.",
+      "parentUuid": "76564647_b7b2880a",
       "range": {
         "startLine": 163,
         "startChar": 31,
