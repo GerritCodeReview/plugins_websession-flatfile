@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "d627f2f2_2a145f8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-11-04T15:55:11Z",
+      "side": 1,
+      "message": "The import allows you to not fully qualify CleanerLifecycle on line 39.",
+      "parentUuid": "9659fa47_c8046f5b",
+      "revId": "a3ca0f41bfcb88aed2bc005a90cce0ac6e072234",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3625aea9_edbf457c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/Module.java",
         "patchSetId": 10
