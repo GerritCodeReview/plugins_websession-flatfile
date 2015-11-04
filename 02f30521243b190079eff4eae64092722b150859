@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f6f6b69c_abb2090a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T11:29:45Z",
+      "side": 1,
+      "message": "Have not verified that particular case (I\u0027ll do it as soon as I have a bit more time) but in our case is clear the websessions folder was growing fast.",
+      "parentUuid": "b62a7ebd_09a409c8",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "02f30521243b190079eff4eae64092722b150859",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d627f2f2_8aaf4ba2",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2015-11-03T22:52:29Z",
       "side": 1,
       "message": "It might make more sense to have this auto adjust itself based on the expiry time?  Maybe make it half the expiry time?",
+      "range": {
+        "startLine": 48,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 36
+      },
+      "revId": "02f30521243b190079eff4eae64092722b150859",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6f6b69c_ebbc11e1",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2015-11-04T11:29:45Z",
+      "side": 1,
+      "message": "That could be an option, may be as a follow up improvement?",
+      "parentUuid": "d627f2f2_8aaf4ba2",
       "range": {
         "startLine": 48,
         "startChar": 31,
