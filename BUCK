@@ -35,6 +35,6 @@ java_test(
   srcs = glob(['src/test/java/**/*.java']),
   resources = glob(['src/test/resources/**/']),
   labels = ['websession-flatfile'],
-  deps = DEPS,
+  deps = GERRIT_TESTS + DEPS,
   source_under_test = [':websession-flatfile__plugin'],
 )
