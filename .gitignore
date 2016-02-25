@@ -1,5 +1,6 @@
 buck-out/
 bucklets
+eclipse-out
 target/
 .buckversion
 .classpath
