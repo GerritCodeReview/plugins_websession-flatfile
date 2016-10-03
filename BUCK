@@ -23,7 +23,7 @@ gerrit_plugin(
 
 java_library(
   name = 'classpath',
-  deps = DEPS,
+  deps = DEPS + GERRIT_TESTS,
 )
 
 java_sources(
