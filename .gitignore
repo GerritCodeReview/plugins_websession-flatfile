@@ -2,6 +2,7 @@ buck-out/
 bucklets
 eclipse-out
 target/
+.buckd/
 .buckversion
 .classpath
 .project
