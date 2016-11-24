@@ -37,5 +37,4 @@ java_test(
   resources = glob(['src/test/resources/**/']),
   labels = ['websession-flatfile'],
   deps = GERRIT_TESTS + DEPS,
-  source_under_test = [':websession-flatfile__plugin'],
 )
