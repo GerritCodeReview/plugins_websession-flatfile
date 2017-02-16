@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ed1fcfd_c9ad472d",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-16T14:03:05Z",
+      "side": 1,
+      "message": "Look pn the corresponding BUCK rule. What\u0027s missing? Right:\n\n  resources \u003d glob([\u0027src/test/resources/**/\u0027]),",
+      "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9f556cb_74a8bcb6",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-16T14:03:05Z",
+      "side": 1,
+      "message": "Revert sandboxing disabling too.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14a72d2f_5bc5e9d4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-16T14:03:05Z",
+      "side": 1,
+      "message": "@Patrick, can you revert all my instrumentation changes in that file? And also enable sandboxing again in BUILD?",
+      "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b72ff5d_e7fd945d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 5
@@ -37,6 +94,30 @@
       "side": 1,
       "message": "Can you try to list the entries in the jar? My guess is that the path is not correct inside the jar.",
       "parentUuid": "8b72ff5d_e7fd945d",
+      "range": {
+        "startLine": 269,
+        "startChar": 43,
+        "endLine": 269,
+        "endChar": 61
+      },
+      "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f435d147_aeec0737",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-16T14:03:05Z",
+      "side": 1,
+      "message": "Thanks, Damien. Today morning, as I was looking into it, it was too early :)\n\nThis test relies on the resource file being provided in the test, but the test rules is missing resource parameters.",
+      "parentUuid": "c48ee25d_3b7db79b",
       "range": {
         "startLine": 269,
         "startChar": 43,
