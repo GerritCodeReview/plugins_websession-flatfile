@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b72ff5d_e7fd945d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-16T08:10:51Z",
+      "side": 1,
+      "message": "resource is null when tests are run with Bazel. In Eclipse this is:\n\n  resource path: /home/davido/projects/gerrit/eclipse-out/plugins/websession-flatfile/test/aSceprtBc02YaMY573T5jfW64ZudJfPbDq",
+      "range": {
+        "startLine": 269,
+        "startChar": 43,
+        "endLine": 269,
+        "endChar": 61
+      },
+      "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
