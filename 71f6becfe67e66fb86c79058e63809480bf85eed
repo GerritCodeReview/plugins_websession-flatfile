@@ -22,6 +22,30 @@
       "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c48ee25d_3b7db79b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1025087
+      },
+      "writtenOn": "2017-02-16T09:17:25Z",
+      "side": 1,
+      "message": "Can you try to list the entries in the jar? My guess is that the path is not correct inside the jar.",
+      "parentUuid": "8b72ff5d_e7fd945d",
+      "range": {
+        "startLine": 269,
+        "startChar": 43,
+        "endLine": 269,
+        "endChar": 61
+      },
+      "revId": "71f6becfe67e66fb86c79058e63809480bf85eed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
