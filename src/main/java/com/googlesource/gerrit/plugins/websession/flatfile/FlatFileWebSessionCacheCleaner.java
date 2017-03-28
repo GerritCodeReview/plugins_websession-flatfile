@@ -19,14 +19,19 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+import java.util.concurrent.ScheduledFuture;
 
 class FlatFileWebSessionCacheCleaner implements Runnable {
 
+  @Singleton
   static class CleanerLifecycle implements LifecycleListener {
     private static final int INITIAL_DELAY_MS = 1000;
     private final WorkQueue queue;
     private final FlatFileWebSessionCacheCleaner cleaner;
     private final long cleanupInterval;
+    private ScheduledFuture<?> scheduledCleanupTask;
 
     @Inject
     CleanerLifecycle(
@@ -40,12 +45,16 @@ class FlatFileWebSessionCacheCleaner implements Runnable {
 
     @Override
     public void start() {
-      queue.getDefaultQueue().scheduleAtFixedRate(cleaner, INITIAL_DELAY_MS,
-          cleanupInterval, MILLISECONDS);
+      scheduledCleanupTask = queue.getDefaultQueue().scheduleAtFixedRate(
+          cleaner, INITIAL_DELAY_MS, cleanupInterval, MILLISECONDS);
     }
 
     @Override
     public void stop() {
+      if (scheduledCleanupTask != null) {
+        scheduledCleanupTask.cancel(true);
+        scheduledCleanupTask = null;
+      }
     }
   }
 
