@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e31d36be_74dc679b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2018-02-26T16:40:39Z",
+      "side": 1,
+      "message": "Could you perhaps add some details here about where you are seeing issues?",
+      "revId": "2a27ca5969842bc7a9813bf22d2f80d3daa840c8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
