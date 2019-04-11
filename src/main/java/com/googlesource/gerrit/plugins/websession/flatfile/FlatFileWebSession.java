@@ -39,18 +39,26 @@ public class FlatFileWebSession extends CacheBasedWebSession {
     protected void configure() {
       bindScope(RequestScoped.class, ServletScopes.REQUEST);
       DynamicItem.bind(binder(), WebSession.class)
-          .to(FlatFileWebSession.class).in(RequestScoped.class);
+          .to(FlatFileWebSession.class)
+          .in(RequestScoped.class);
     }
   }
 
   @Inject
-  FlatFileWebSession(@RootRelative final Provider<HttpServletRequest> request,
-      @RootRelative final Provider<HttpServletResponse> response,
-      final WebSessionManagerFactory managerFactory,
-      final FlatFileWebSessionCache cache, final AuthConfig authConfig,
-      final Provider<AnonymousUser> anonymousProvider,
-      final RequestFactory identified) {
-    super(request.get(), response.get(), managerFactory.create(cache),
-        authConfig, anonymousProvider, identified);
+  FlatFileWebSession(
+      @RootRelative Provider<HttpServletRequest> request,
+      @RootRelative Provider<HttpServletResponse> response,
+      WebSessionManagerFactory managerFactory,
+      FlatFileWebSessionCache cache,
+      AuthConfig authConfig,
+      Provider<AnonymousUser> anonymousProvider,
+      RequestFactory identified) {
+    super(
+        request.get(),
+        response.get(),
+        managerFactory.create(cache),
+        authConfig,
+        anonymousProvider,
+        identified);
   }
 }

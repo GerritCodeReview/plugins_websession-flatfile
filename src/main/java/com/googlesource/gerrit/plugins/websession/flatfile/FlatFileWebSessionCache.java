@@ -17,15 +17,12 @@ package com.googlesource.gerrit.plugins.websession.flatfile;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.httpd.WebSessionManager;
 import com.google.gerrit.httpd.WebSessionManager.Val;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -35,6 +32,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,24 +46,40 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 @Singleton
-public class FlatFileWebSessionCache implements
-    Cache<String, WebSessionManager.Val> {
-  private static final Logger log = LoggerFactory
-      .getLogger(FlatFileWebSessionCache.class);
+public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
+  /** Provides static methods to set the system clock for testing purposes only. */
+  static class TimeMachine {
+    private static Clock clock = Clock.systemDefaultZone();
 
-  private final Path dir;
+    private TimeMachine() {
+      throw new IllegalAccessError("Utility class. Not meant to be instantiated.");
+    }
+
+    static Instant now() {
+      return Instant.now(getClock());
+    }
+
+    static void useFixedClockAt(Instant instant) {
+      clock = Clock.fixed(instant, ZoneId.systemDefault());
+    }
+
+    static void useSystemDefaultZoneClock() {
+      clock = Clock.systemDefaultZone();
+    }
+
+    private static Clock getClock() {
+      return clock;
+    }
+  }
+
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
+
+  private final Path websessionsDir;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir Path dir) {
-    this.dir = dir;
-    if (Files.notExists(dir)) {
-      log.info(dir + " not found. Creating it.");
-      try {
-        Files.createDirectory(dir);
-      } catch (IOException e) {
-        log.error("Unable to create directory " + dir, e);
-      }
-    }
+  public FlatFileWebSessionCache(@WebSessionDir Path websessionsDir) throws IOException {
+    this.websessionsDir = websessionsDir;
+    Files.createDirectories(websessionsDir);
   }
 
   @Override
@@ -82,16 +98,17 @@ public class FlatFileWebSessionCache implements
   public void cleanUp() {
     for (Path path : listFiles()) {
       Val val = readFile(path);
-      long expires = val.getExpiresAt();
-      if (expires < System.currentTimeMillis()) {
-        deleteFile(path);
+      if (val != null) {
+        Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
+        if (expires.isBefore(TimeMachine.now())) {
+          deleteFile(path);
+        }
       }
     }
   }
 
   @Override
-  public Val get(String key, Callable<? extends Val> valueLoader)
-      throws ExecutionException {
+  public Val get(String key, Callable<? extends Val> valueLoader) throws ExecutionException {
     Val value = getIfPresent(key);
     if (value == null) {
       try {
@@ -119,7 +136,7 @@ public class FlatFileWebSessionCache implements
   @Nullable
   public Val getIfPresent(Object key) {
     if (key instanceof String) {
-      Path path = dir.resolve((String) key);
+      Path path = websessionsDir.resolve((String) key);
       return readFile(path);
     }
     return null;
@@ -128,7 +145,7 @@ public class FlatFileWebSessionCache implements
   @Override
   public void invalidate(Object key) {
     if (key instanceof String) {
-      deleteFile(dir.resolve((String) key));
+      deleteFile(websessionsDir.resolve((String) key));
     }
   }
 
@@ -149,17 +166,18 @@ public class FlatFileWebSessionCache implements
   @Override
   public void put(String key, Val value) {
     try {
-      Path tempFile =
-          Files.createTempFile(dir, UUID.randomUUID().toString(), null);
+      Path tempFile = Files.createTempFile(websessionsDir, UUID.randomUUID().toString(), null);
       try (OutputStream fileStream = Files.newOutputStream(tempFile);
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
-        Files.move(tempFile, tempFile.resolveSibling(key),
+        Files.move(
+            tempFile,
+            tempFile.resolveSibling(key),
             StandardCopyOption.REPLACE_EXISTING,
             StandardCopyOption.ATOMIC_MOVE);
       }
     } catch (IOException e) {
-      log.warn("Cannot put into cache " + dir, e);
+      log.atWarning().withCause(e).log("Cannot put into cache %s", websessionsDir);
     }
   }
 
@@ -177,21 +195,24 @@ public class FlatFileWebSessionCache implements
 
   @Override
   public CacheStats stats() {
-    log.warn("stats() unimplemented");
+    log.atWarning().log("stats() unimplemented");
     return null;
   }
 
   private Val readFile(Path path) {
-    if (Files.exists(path)) {
+    if (path.toFile().exists()) {
       try (InputStream fileStream = Files.newInputStream(path);
           ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
       } catch (ClassNotFoundException e) {
-        log.warn("Entry " + path + " in cache " + dir + " has an incompatible "
-            + "class and can't be deserialized. Invalidating entry.");
+        log.atWarning().log(
+            "Entry %s in cache %s has an incompatible class and can't be"
+                + " deserialized. Invalidating entry.",
+            path, websessionsDir);
+        log.atFine().withCause(e).log(e.getMessage());
         invalidate(path.getFileName().toString());
       } catch (IOException e) {
-        log.warn("Cannot read cache " + dir, e);
+        log.atWarning().withCause(e).log("Cannot read cache %s", websessionsDir);
       }
     }
     return null;
@@ -201,18 +222,18 @@ public class FlatFileWebSessionCache implements
     try {
       Files.deleteIfExists(path);
     } catch (IOException e) {
-      log.error("Error trying to delete " + path + " from " + dir, e);
+      log.atSevere().withCause(e).log("Error trying to delete %s from %s", path, websessionsDir);
     }
   }
 
   private List<Path> listFiles() {
     List<Path> files = new ArrayList<>();
-    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir)) {
+    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
       for (Path path : dirStream) {
         files.add(path);
       }
     } catch (IOException e) {
-      log.error("Cannot list files in cache " + dir, e);
+      log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
     }
     return files;
   }

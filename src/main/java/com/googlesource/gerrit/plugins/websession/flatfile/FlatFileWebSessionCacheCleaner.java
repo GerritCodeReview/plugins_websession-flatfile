@@ -15,54 +15,76 @@
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
+import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import java.util.concurrent.ScheduledFuture;
 
-class FlatFileWebSessionCacheCleaner implements Runnable {
+@Singleton
+class FlatFileWebSessionCacheCleaner implements LifecycleListener {
 
-  static class CleanerLifecycle implements LifecycleListener {
-    private static final int INITIAL_DELAY_MS = 1000;
-    private final WorkQueue queue;
-    private final FlatFileWebSessionCacheCleaner cleaner;
-    private final long cleanupInterval;
-
-    @Inject
-    CleanerLifecycle(
-        WorkQueue queue,
-        FlatFileWebSessionCacheCleaner cleaner,
-        @CleanupInterval long cleanupInterval) {
-      this.queue = queue;
-      this.cleaner = cleaner;
-      this.cleanupInterval = cleanupInterval;
-    }
-
-    @Override
-    public void start() {
-      queue.getDefaultQueue().scheduleAtFixedRate(cleaner, INITIAL_DELAY_MS,
-          cleanupInterval, MILLISECONDS);
-    }
-
-    @Override
-    public void stop() {
-    }
-  }
-
-  private FlatFileWebSessionCache flatFileWebSessionCache;
+  private final WorkQueue queue;
+  private final Provider<CleanupTask> cleanupTaskProvider;
+  private final long cleanupIntervalMillis;
+  private ScheduledFuture<?> scheduledCleanupTask;
 
   @Inject
-  FlatFileWebSessionCacheCleaner(FlatFileWebSessionCache flatFileWebSessionCache) {
+  FlatFileWebSessionCacheCleaner(
+      WorkQueue queue,
+      Provider<CleanupTask> cleanupTaskProvider,
+      @CleanupInterval long cleanupInterval) {
+    this.queue = queue;
+    this.cleanupTaskProvider = cleanupTaskProvider;
+    this.cleanupIntervalMillis = cleanupInterval;
+  }
+
+  @Override
+  public void start() {
+    scheduledCleanupTask =
+        queue
+            .getDefaultQueue()
+            .scheduleAtFixedRate(
+                cleanupTaskProvider.get(),
+                SECONDS.toMillis(1),
+                cleanupIntervalMillis,
+                MILLISECONDS);
+  }
+
+  @Override
+  public void stop() {
+    if (scheduledCleanupTask != null) {
+      scheduledCleanupTask.cancel(true);
+      scheduledCleanupTask = null;
+    }
+  }
+}
+
+class CleanupTask implements Runnable {
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
+  private final FlatFileWebSessionCache flatFileWebSessionCache;
+  private final String pluginName;
+
+  @Inject
+  CleanupTask(FlatFileWebSessionCache flatFileWebSessionCache, @PluginName String pluginName) {
     this.flatFileWebSessionCache = flatFileWebSessionCache;
+    this.pluginName = pluginName;
   }
 
   @Override
   public void run() {
+    log.atInfo().log("Cleaning up expired file based websessions...");
     flatFileWebSessionCache.cleanUp();
+    log.atInfo().log("Cleaning up expired file based websessions...Done");
   }
 
   @Override
   public String toString() {
-    return "FlatFile WebSession Cleaner";
+    return String.format("[%s] Clean up expired file based websessions", pluginName);
   }
 }
