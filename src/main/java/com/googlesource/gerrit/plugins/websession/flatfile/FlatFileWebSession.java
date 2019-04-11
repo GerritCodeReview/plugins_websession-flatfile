@@ -45,13 +45,13 @@ public class FlatFileWebSession extends CacheBasedWebSession {
 
   @Inject
   FlatFileWebSession(
-      @RootRelative final Provider<HttpServletRequest> request,
-      @RootRelative final Provider<HttpServletResponse> response,
-      final WebSessionManagerFactory managerFactory,
-      final FlatFileWebSessionCache cache,
-      final AuthConfig authConfig,
-      final Provider<AnonymousUser> anonymousProvider,
-      final RequestFactory identified) {
+      @RootRelative Provider<HttpServletRequest> request,
+      @RootRelative Provider<HttpServletResponse> response,
+      WebSessionManagerFactory managerFactory,
+      FlatFileWebSessionCache cache,
+      AuthConfig authConfig,
+      Provider<AnonymousUser> anonymousProvider,
+      RequestFactory identified) {
     super(
         request.get(),
         response.get(),
