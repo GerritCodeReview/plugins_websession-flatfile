@@ -18,14 +18,16 @@ import static java.util.concurrent.TimeUnit.HOURS;
 
 import com.google.common.base.Strings;
 import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.httpd.WebSession;
 import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-
-import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCacheCleaner.CleanerLifecycle;
+import com.google.inject.servlet.RequestScoped;
+import com.google.inject.servlet.ServletScopes;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,16 +38,20 @@ public class Module extends LifecycleModule {
 
   @Override
   protected void configure() {
-    listener().to(CleanerLifecycle.class);
+    bindScope(RequestScoped.class, ServletScopes.REQUEST);
+    DynamicItem.bind(binder(), WebSession.class)
+        .to(FlatFileWebSession.class)
+        .in(RequestScoped.class);
+    listener().to(FlatFileWebSessionCacheCleaner.class);
   }
 
   @Provides
   @Singleton
   @WebSessionDir
-  Path getWebSessionDir(SitePaths site, PluginConfigFactory cfg,
-      @PluginName String pluginName) {
-    return Paths.get(cfg.getFromGerritConfig(pluginName).getString("directory",
-        site.site_path + "/websessions"));
+  Path getWebSessionDir(SitePaths site, PluginConfigFactory cfg, @PluginName String pluginName) {
+    return Paths.get(
+        cfg.getFromGerritConfig(pluginName)
+            .getString("directory", site.site_path + "/websessions"));
   }
 
   @Provides
@@ -53,9 +59,7 @@ public class Module extends LifecycleModule {
   @CleanupInterval
   Long getCleanupInterval(PluginConfigFactory cfg, @PluginName String pluginName) {
     String fromConfig =
-        Strings.nullToEmpty(cfg.getFromGerritConfig(pluginName).getString(
-            "cleanupInterval"));
-    return HOURS.toMillis(ConfigUtil.getTimeUnit(fromConfig,
-        DEFAULT_CLEANUP_INTERVAL, HOURS));
+        Strings.nullToEmpty(cfg.getFromGerritConfig(pluginName).getString("cleanupInterval"));
+    return HOURS.toMillis(ConfigUtil.getTimeUnit(fromConfig, DEFAULT_CLEANUP_INTERVAL, HOURS));
   }
 }
