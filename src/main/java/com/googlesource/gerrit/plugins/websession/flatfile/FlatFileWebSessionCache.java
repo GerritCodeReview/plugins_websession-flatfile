@@ -74,12 +74,12 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
-  private final Path dir;
+  private final Path websessionsDir;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir Path dir) throws IOException {
-    this.dir = dir;
-    Files.createDirectories(dir);
+  public FlatFileWebSessionCache(@WebSessionDir Path websessionsDir) throws IOException {
+    this.websessionsDir = websessionsDir;
+    Files.createDirectories(websessionsDir);
   }
 
   @Override
@@ -136,7 +136,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   @Nullable
   public Val getIfPresent(Object key) {
     if (key instanceof String) {
-      Path path = dir.resolve((String) key);
+      Path path = websessionsDir.resolve((String) key);
       return readFile(path);
     }
     return null;
@@ -145,7 +145,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   @Override
   public void invalidate(Object key) {
     if (key instanceof String) {
-      deleteFile(dir.resolve((String) key));
+      deleteFile(websessionsDir.resolve((String) key));
     }
   }
 
@@ -166,7 +166,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   @Override
   public void put(String key, Val value) {
     try {
-      Path tempFile = Files.createTempFile(dir, UUID.randomUUID().toString(), null);
+      Path tempFile = Files.createTempFile(websessionsDir, UUID.randomUUID().toString(), null);
       try (OutputStream fileStream = Files.newOutputStream(tempFile);
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
@@ -177,7 +177,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
             StandardCopyOption.ATOMIC_MOVE);
       }
     } catch (IOException e) {
-      log.atWarning().withCause(e).log("Cannot put into cache %s", dir);
+      log.atWarning().withCause(e).log("Cannot put into cache %s", websessionsDir);
     }
   }
 
@@ -200,7 +200,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   }
 
   private Val readFile(Path path) {
-    if (Files.exists(path)) {
+    if (path.toFile().exists()) {
       try (InputStream fileStream = Files.newInputStream(path);
           ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
@@ -208,11 +208,11 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
         log.atWarning().log(
             "Entry %s in cache %s has an incompatible class and can't be"
                 + " deserialized. Invalidating entry.",
-            path, dir);
+            path, websessionsDir);
         log.atFine().withCause(e).log(e.getMessage());
         invalidate(path.getFileName().toString());
       } catch (IOException e) {
-        log.atWarning().withCause(e).log("Cannot read cache %s", dir);
+        log.atWarning().withCause(e).log("Cannot read cache %s", websessionsDir);
       }
     }
     return null;
@@ -222,18 +222,18 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
     try {
       Files.deleteIfExists(path);
     } catch (IOException e) {
-      log.atSevere().withCause(e).log("Error trying to delete %s from %s", path, dir);
+      log.atSevere().withCause(e).log("Error trying to delete %s from %s", path, websessionsDir);
     }
   }
 
   private List<Path> listFiles() {
     List<Path> files = new ArrayList<>();
-    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(dir)) {
+    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
       for (Path path : dirStream) {
         files.add(path);
       }
     } catch (IOException e) {
-      log.atSevere().withCause(e).log("Cannot list files in cache %s", dir);
+      log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
     }
     return files;
   }

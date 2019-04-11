@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
@@ -27,10 +28,10 @@ import java.util.concurrent.ScheduledFuture;
 
 @Singleton
 class FlatFileWebSessionCacheCleaner implements LifecycleListener {
-  private static final int INITIAL_DELAY_MS = 1000;
+
   private final WorkQueue queue;
   private final Provider<CleanupTask> cleanupTaskProvider;
-  private final long cleanupInterval;
+  private final long cleanupIntervalMillis;
   private ScheduledFuture<?> scheduledCleanupTask;
 
   @Inject
@@ -40,7 +41,7 @@ class FlatFileWebSessionCacheCleaner implements LifecycleListener {
       @CleanupInterval long cleanupInterval) {
     this.queue = queue;
     this.cleanupTaskProvider = cleanupTaskProvider;
-    this.cleanupInterval = cleanupInterval;
+    this.cleanupIntervalMillis = cleanupInterval;
   }
 
   @Override
@@ -49,7 +50,10 @@ class FlatFileWebSessionCacheCleaner implements LifecycleListener {
         queue
             .getDefaultQueue()
             .scheduleAtFixedRate(
-                cleanupTaskProvider.get(), INITIAL_DELAY_MS, cleanupInterval, MILLISECONDS);
+                cleanupTaskProvider.get(),
+                SECONDS.toMillis(1),
+                cleanupIntervalMillis,
+                MILLISECONDS);
   }
 
   @Override
