@@ -34,8 +34,6 @@ indicates the cleanup operation to be triggered every hour.
 
 Values should use common time unit suffixes to express their setting:
 
-* s, sec, second, seconds
-* m, min, minute, minutes
 * h, hr, hour, hours
 * d, day, days
 * w, week, weeks (`1 week` is treated as `7 days`)
@@ -43,6 +41,8 @@ Values should use common time unit suffixes to express their setting:
 * y, year, years (`1 year` is treated as `365 days`)
 
 If a time unit suffix is not specified, `hours` is assumed.
+
+Time intervals smaller than one hour are not supported.
 
 If 'cleanupInterval' is not present in the configuration, the
 cleanup operation is triggered every 24 hours.
