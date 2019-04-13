@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b11aecc3_920978d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-13T10:35:08Z",
+      "side": 1,
+      "message": "Ideally these would be done as separate changes.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "0e7f682f457d148659af3ff9aeb33b4da72259d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f14f810e_7afd6439",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-13T10:35:08Z",
+      "side": 1,
+      "message": "too",
+      "range": {
+        "startLine": 29,
+        "startChar": 55,
+        "endLine": 29,
+        "endChar": 57
+      },
+      "revId": "0e7f682f457d148659af3ff9aeb33b4da72259d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35d7dc71_84d08c93",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-13T10:35:08Z",
+      "side": 1,
+      "message": "The latest version is 2.27.0, also upgraded on the HA plugin.",
+      "range": {
+        "startLine": 6,
+        "startChar": 45,
+        "endLine": 6,
+        "endChar": 53
+      },
+      "revId": "0e7f682f457d148659af3ff9aeb33b4da72259d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
