@@ -106,8 +106,7 @@ public class FlatFileWebSessionCacheTest {
 
   @Test
   public void getIfPresentObjectNonStringTest() throws Exception {
-    Path path = dir.resolve(key);
-    assertThat(flatFileWebSessionCache.getIfPresent(path)).isNull();
+    assertThat(flatFileWebSessionCache.getIfPresent(new Object())).isNull();
   }
 
   @Test
