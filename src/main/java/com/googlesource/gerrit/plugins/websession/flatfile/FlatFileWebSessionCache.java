@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.websession.flatfile;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.httpd.WebSessionManager;
 import com.google.gerrit.httpd.WebSessionManager.Val;
@@ -43,12 +44,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
-  private static final Logger log = LoggerFactory.getLogger(FlatFileWebSessionCache.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   /** Provides static methods to set the system clock for testing purposes only. */
   static class TimeMachine {
@@ -178,7 +177,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
             StandardCopyOption.ATOMIC_MOVE);
       }
     } catch (IOException e) {
-      log.warn("Cannot put into cache " + websessionsDir, e);
+      log.atWarning().withCause(e).log("Cannot put into cache %s", websessionsDir);
     }
   }
 
@@ -196,7 +195,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public CacheStats stats() {
-    log.warn("stats() unimplemented");
+    log.atWarning().log("stats() unimplemented");
     return null;
   }
 
@@ -206,16 +205,14 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
           ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
       } catch (ClassNotFoundException e) {
-        log.warn(
-            "Entry "
-                + path
-                + " in cache "
-                + websessionsDir
-                + " has an incompatible "
-                + "class and can't be deserialized. Invalidating entry.");
+        log.atWarning().log(
+            "Entry %s in cache %s has an incompatible class and can't be"
+                + " deserialized. Invalidating entry.",
+            path, websessionsDir);
+        log.atFine().withCause(e).log(e.getMessage());
         invalidate(path.getFileName().toString());
       } catch (IOException e) {
-        log.warn("Cannot read cache " + websessionsDir, e);
+        log.atWarning().withCause(e).log("Cannot read cache %s", websessionsDir);
       }
     }
     return null;
@@ -225,7 +222,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
     try {
       Files.deleteIfExists(path);
     } catch (IOException e) {
-      log.error("Error trying to delete " + path + " from " + websessionsDir, e);
+      log.atSevere().withCause(e).log("Error trying to delete %s from %s", path, websessionsDir);
     }
   }
 
@@ -236,7 +233,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
         files.add(path);
       }
     } catch (IOException e) {
-      log.error("Cannot list files in cache " + websessionsDir, e);
+      log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
     }
     return files;
   }
