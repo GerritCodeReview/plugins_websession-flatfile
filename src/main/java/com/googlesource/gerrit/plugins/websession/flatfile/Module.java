@@ -24,9 +24,7 @@ import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-
 import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCacheCleaner.CleanerLifecycle;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -42,10 +40,10 @@ public class Module extends LifecycleModule {
   @Provides
   @Singleton
   @WebSessionDir
-  Path getWebSessionDir(SitePaths site, PluginConfigFactory cfg,
-      @PluginName String pluginName) {
-    return Paths.get(cfg.getFromGerritConfig(pluginName).getString("directory",
-        site.site_path + "/websessions"));
+  Path getWebSessionDir(SitePaths site, PluginConfigFactory cfg, @PluginName String pluginName) {
+    return Paths.get(
+        cfg.getFromGerritConfig(pluginName)
+            .getString("directory", site.site_path + "/websessions"));
   }
 
   @Provides
@@ -53,9 +51,7 @@ public class Module extends LifecycleModule {
   @CleanupInterval
   Long getCleanupInterval(PluginConfigFactory cfg, @PluginName String pluginName) {
     String fromConfig =
-        Strings.nullToEmpty(cfg.getFromGerritConfig(pluginName).getString(
-            "cleanupInterval"));
-    return HOURS.toMillis(ConfigUtil.getTimeUnit(fromConfig,
-        DEFAULT_CLEANUP_INTERVAL, HOURS));
+        Strings.nullToEmpty(cfg.getFromGerritConfig(pluginName).getString("cleanupInterval"));
+    return HOURS.toMillis(ConfigUtil.getTimeUnit(fromConfig, DEFAULT_CLEANUP_INTERVAL, HOURS));
   }
 }

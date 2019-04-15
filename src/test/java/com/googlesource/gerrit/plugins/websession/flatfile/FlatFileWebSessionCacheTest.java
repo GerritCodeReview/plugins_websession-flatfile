@@ -18,11 +18,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.httpd.WebSessionManager.Val;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.DirectoryStream;
@@ -39,6 +34,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FlatFileWebSessionCacheTest {
 
@@ -95,8 +93,7 @@ public class FlatFileWebSessionCacheTest {
     Files.createFile(dir.resolve(key));
     loadExistingKeyToCacheDir();
     List<String> keys = Arrays.asList(new String[] {key, existingKey});
-    assertThat(flatFileWebSessionCache.getAllPresent(keys))
-        .containsKey(existingKey);
+    assertThat(flatFileWebSessionCache.getAllPresent(keys)).containsKey(existingKey);
   }
 
   @Test
@@ -123,12 +120,10 @@ public class FlatFileWebSessionCacheTest {
         return null;
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
-        .isNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNull();
 
     loadExistingKeyToCacheDir();
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
-        .isNotNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNotNull();
   }
 
   @Test(expected = ExecutionException.class)
@@ -139,8 +134,7 @@ public class FlatFileWebSessionCacheTest {
         throw new Exception();
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
-        .isNull();
+    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader())).isNull();
   }
 
   @Test
@@ -213,21 +207,22 @@ public class FlatFileWebSessionCacheTest {
   }
 
   private void emptyAndDelete(Path dir) throws IOException {
-    Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
-      @Override
-      public FileVisitResult postVisitDirectory(Path dir, IOException exc)
-          throws IOException {
-        Files.delete(dir);
-        return FileVisitResult.CONTINUE;
-      }
+    Files.walkFileTree(
+        dir,
+        new SimpleFileVisitor<Path>() {
+          @Override
+          public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+            Files.delete(dir);
+            return FileVisitResult.CONTINUE;
+          }
 
-      @Override
-      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-          throws IOException {
-        Files.delete(file);
-        return FileVisitResult.CONTINUE;
-      }
-    });
+          @Override
+          public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+              throws IOException {
+            Files.delete(file);
+            return FileVisitResult.CONTINUE;
+          }
+        });
   }
 
   private boolean isDirEmpty(final Path dir) throws IOException {
