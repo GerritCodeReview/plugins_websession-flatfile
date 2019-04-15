@@ -40,13 +40,13 @@ class FlatFileWebSessionCacheCleaner implements Runnable {
 
     @Override
     public void start() {
-      queue.getDefaultQueue().scheduleAtFixedRate(cleaner, INITIAL_DELAY_MS,
-          cleanupInterval, MILLISECONDS);
+      queue
+          .getDefaultQueue()
+          .scheduleAtFixedRate(cleaner, INITIAL_DELAY_MS, cleanupInterval, MILLISECONDS);
     }
 
     @Override
-    public void stop() {
-    }
+    public void stop() {}
   }
 
   private FlatFileWebSessionCache flatFileWebSessionCache;

@@ -22,10 +22,6 @@ import com.google.gerrit.httpd.WebSessionManager;
 import com.google.gerrit.httpd.WebSessionManager.Val;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -44,12 +40,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
-public class FlatFileWebSessionCache implements
-    Cache<String, WebSessionManager.Val> {
-  private static final Logger log = LoggerFactory
-      .getLogger(FlatFileWebSessionCache.class);
+public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
+  private static final Logger log = LoggerFactory.getLogger(FlatFileWebSessionCache.class);
 
   private final Path dir;
 
@@ -90,8 +86,7 @@ public class FlatFileWebSessionCache implements
   }
 
   @Override
-  public Val get(String key, Callable<? extends Val> valueLoader)
-      throws ExecutionException {
+  public Val get(String key, Callable<? extends Val> valueLoader) throws ExecutionException {
     Val value = getIfPresent(key);
     if (value == null) {
       try {
@@ -149,12 +144,13 @@ public class FlatFileWebSessionCache implements
   @Override
   public void put(String key, Val value) {
     try {
-      Path tempFile =
-          Files.createTempFile(dir, UUID.randomUUID().toString(), null);
+      Path tempFile = Files.createTempFile(dir, UUID.randomUUID().toString(), null);
       try (OutputStream fileStream = Files.newOutputStream(tempFile);
           ObjectOutputStream objStream = new ObjectOutputStream(fileStream)) {
         objStream.writeObject(value);
-        Files.move(tempFile, tempFile.resolveSibling(key),
+        Files.move(
+            tempFile,
+            tempFile.resolveSibling(key),
             StandardCopyOption.REPLACE_EXISTING,
             StandardCopyOption.ATOMIC_MOVE);
       }
@@ -187,8 +183,13 @@ public class FlatFileWebSessionCache implements
           ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
       } catch (ClassNotFoundException e) {
-        log.warn("Entry " + path + " in cache " + dir + " has an incompatible "
-            + "class and can't be deserialized. Invalidating entry.");
+        log.warn(
+            "Entry "
+                + path
+                + " in cache "
+                + dir
+                + " has an incompatible "
+                + "class and can't be deserialized. Invalidating entry.");
         invalidate(path.getFileName().toString());
       } catch (IOException e) {
         log.warn("Cannot read cache " + dir, e);
