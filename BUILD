@@ -24,7 +24,17 @@ junit_tests(
     srcs = glob(["src/test/java/**/*.java"]),
     resources = glob(["src/test/resources/**/*"]),
     tags = ["websession-flatfile"],
-    deps = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
+    deps = [
+        ":websession-flatfile__plugin_test_deps",
+    ],
+)
+
+java_library(
+    name = "websession-flatfile__plugin_test_deps",
+    testonly = 1,
+    visibility = ["//visibility:public"],
+    exports = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
         ":websession-flatfile__plugin",
+        "@mockito//jar",
     ],
 )
