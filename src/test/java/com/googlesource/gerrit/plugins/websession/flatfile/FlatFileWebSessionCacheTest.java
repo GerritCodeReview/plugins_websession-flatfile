@@ -23,13 +23,9 @@ import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCac
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.DirectoryStream;
-import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -44,10 +40,9 @@ import org.junit.rules.TemporaryFolder;
 
 public class FlatFileWebSessionCacheTest {
 
-  private static final int DEFAULT_KEYS_SIZE = 10;
-
   private static final String EXISTING_KEY = "aSceprtBc02YaMY573T5jfW64ZudJfPbDq";
   private static final String EMPTY_KEY = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
+  private static final String INVALID_KEY = "aOFdpHriBM6dN055M13PjDdTZagl5r5aSG";
   private static final String NEW_KEY = "abcde12345";
 
   @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
@@ -66,16 +61,18 @@ public class FlatFileWebSessionCacheTest {
     loadKeyToCacheDir(EMPTY_KEY);
     assertThat(flatFileWebSessionCache.asMap()).isEmpty();
 
+    loadKeyToCacheDir(INVALID_KEY);
+    assertThat(flatFileWebSessionCache.asMap()).isEmpty();
+
     loadKeyToCacheDir(EXISTING_KEY);
     assertThat(flatFileWebSessionCache.asMap()).containsKey(EXISTING_KEY);
   }
 
   @Test
   public void constructorCreateDir() throws IOException {
-    Path testDir = Paths.get("tmp");
-    flatFileWebSessionCache = new FlatFileWebSessionCache(testDir);
-    assertThat(Files.exists(testDir)).isTrue();
-    Files.deleteIfExists(testDir);
+    assertThat(dir.toFile().delete()).isTrue();
+    flatFileWebSessionCache = new FlatFileWebSessionCache(dir);
+    assertThat(dir.toFile().exists()).isTrue();
   }
 
   @Test
@@ -98,12 +95,27 @@ public class FlatFileWebSessionCacheTest {
   }
 
   @Test
-  public void getAllPresentTest() throws Exception {
-    loadKeyToCacheDir(EMPTY_KEY);
+  public void cleanUpWithErrorsWhileListingFilesTest() throws Exception {
+    tempFolder.delete();
+    flatFileWebSessionCache.cleanUp();
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(0);
+  }
+
+  @Test
+  public void cleanUpWithErrorsWhileDeleteFileTest() throws Exception {
     loadKeyToCacheDir(EXISTING_KEY);
-    List<String> keys = ImmutableList.of(EMPTY_KEY, EXISTING_KEY);
-    assertThat(flatFileWebSessionCache.getAllPresent(keys).size()).isEqualTo(1);
-    assertThat(flatFileWebSessionCache.getAllPresent(keys)).containsKey(EXISTING_KEY);
+    try {
+      dir.toFile().setWritable(false);
+      flatFileWebSessionCache.cleanUp();
+      assertThat(flatFileWebSessionCache.size()).isEqualTo(1);
+    } finally {
+      dir.toFile().setWritable(true);
+    }
+  }
+
+  @Test
+  public void getIfPresentEmptyKeyTest() throws Exception {
+    assertThat(flatFileWebSessionCache.getIfPresent(EMPTY_KEY)).isNull();
   }
 
   @Test
@@ -112,9 +124,26 @@ public class FlatFileWebSessionCacheTest {
   }
 
   @Test
+  public void getIfPresentInvalidKeyTest() throws Exception {
+    loadKeyToCacheDir(INVALID_KEY);
+    Path path = dir.resolve(INVALID_KEY);
+    assertThat(flatFileWebSessionCache.getIfPresent(path.toString())).isNull();
+  }
+
+  @Test
   public void getIfPresentTest() throws Exception {
     loadKeyToCacheDir(EXISTING_KEY);
     assertThat(flatFileWebSessionCache.getIfPresent(EXISTING_KEY)).isNotNull();
+  }
+
+  @Test
+  public void getAllPresentTest() throws Exception {
+    loadKeyToCacheDir(EMPTY_KEY);
+    loadKeyToCacheDir(INVALID_KEY);
+    loadKeyToCacheDir(EXISTING_KEY);
+    List<String> keys = ImmutableList.of(EMPTY_KEY, EXISTING_KEY);
+    assertThat(flatFileWebSessionCache.getAllPresent(keys).size()).isEqualTo(1);
+    assertThat(flatFileWebSessionCache.getAllPresent(keys)).containsKey(EXISTING_KEY);
   }
 
   @Test
@@ -144,15 +173,25 @@ public class FlatFileWebSessionCacheTest {
 
   @Test
   public void invalidateAllCollectionTest() throws Exception {
-    List<String> keys = createKeysCollection();
+    int numberOfKeys = 15;
+    List<String> keys = loadKeysToCacheDir(numberOfKeys);
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(numberOfKeys);
+    assertThat(isDirEmpty(dir)).isFalse();
+
     flatFileWebSessionCache.invalidateAll(keys);
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(0);
     assertThat(isDirEmpty(dir)).isTrue();
   }
 
   @Test
   public void invalidateAllTest() throws Exception {
-    createKeysCollection();
+    int numberOfKeys = 5;
+    loadKeysToCacheDir(numberOfKeys);
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(numberOfKeys);
+    assertThat(isDirEmpty(dir)).isFalse();
+
     flatFileWebSessionCache.invalidateAll();
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(0);
     assertThat(isDirEmpty(dir)).isTrue();
   }
 
@@ -166,10 +205,10 @@ public class FlatFileWebSessionCacheTest {
 
   @Test
   public void invalidateTestObjectNotString() throws Exception {
-    createKeysCollection();
-    assertThat(flatFileWebSessionCache.size()).isEqualTo(DEFAULT_KEYS_SIZE);
+    loadKeyToCacheDir(EXISTING_KEY);
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(1);
     flatFileWebSessionCache.invalidate(new Object());
-    assertThat(flatFileWebSessionCache.size()).isEqualTo(DEFAULT_KEYS_SIZE);
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(1);
   }
 
   @Test
@@ -190,9 +229,19 @@ public class FlatFileWebSessionCacheTest {
   }
 
   @Test
+  public void putWithErrorsTest() throws Exception {
+    loadKeyToCacheDir(EXISTING_KEY);
+    Val val = flatFileWebSessionCache.getIfPresent(EXISTING_KEY);
+    tempFolder.delete();
+    flatFileWebSessionCache.put(NEW_KEY, val);
+    assertThat(flatFileWebSessionCache.getIfPresent(NEW_KEY)).isNull();
+  }
+
+  @Test
   public void sizeTest() throws Exception {
-    createKeysCollection();
-    assertThat(flatFileWebSessionCache.size()).isEqualTo(DEFAULT_KEYS_SIZE);
+    int numberOfKeys = 10;
+    loadKeysToCacheDir(numberOfKeys);
+    assertThat(flatFileWebSessionCache.size()).isEqualTo(numberOfKeys);
   }
 
   @Test
@@ -200,32 +249,13 @@ public class FlatFileWebSessionCacheTest {
     assertThat(flatFileWebSessionCache.stats()).isNull();
   }
 
-  private List<String> createKeysCollection() throws IOException {
+  private List<String> loadKeysToCacheDir(int number) throws IOException {
     List<String> keys = new ArrayList<>();
-    for (int i = 0; i < DEFAULT_KEYS_SIZE; i++) {
+    for (int i = 0; i < number; i++) {
       Path tmp = Files.createTempFile(dir, "cache", null);
       keys.add(tmp.getFileName().toString());
     }
     return keys;
-  }
-
-  private void emptyAndDelete(Path dir) throws IOException {
-    Files.walkFileTree(
-        dir,
-        new SimpleFileVisitor<Path>() {
-          @Override
-          public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-            Files.delete(dir);
-            return FileVisitResult.CONTINUE;
-          }
-
-          @Override
-          public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-              throws IOException {
-            Files.delete(file);
-            return FileVisitResult.CONTINUE;
-          }
-        });
   }
 
   private boolean isDirEmpty(final Path dir) throws IOException {
