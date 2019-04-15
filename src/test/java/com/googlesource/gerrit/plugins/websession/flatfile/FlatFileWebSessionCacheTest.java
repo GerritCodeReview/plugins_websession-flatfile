@@ -18,6 +18,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.httpd.WebSessionManager.Val;
+import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCache.TimeMachine;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.DirectoryStream;
@@ -28,6 +29,8 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,8 +87,20 @@ public class FlatFileWebSessionCacheTest {
   @Test
   public void cleanUpTest() throws Exception {
     loadExistingKeyToCacheDir();
-    flatFileWebSessionCache.cleanUp();
-    assertThat(isDirEmpty(dir)).isTrue();
+    try {
+      long existingKeyExpireAt = flatFileWebSessionCache.getIfPresent(existingKey).getExpiresAt();
+      TimeMachine.useFixedClockAt(
+          Instant.ofEpochMilli(existingKeyExpireAt).minus(1, ChronoUnit.HOURS));
+      flatFileWebSessionCache.cleanUp();
+      assertThat(isDirEmpty(dir)).isFalse();
+
+      TimeMachine.useFixedClockAt(
+          Instant.ofEpochMilli(existingKeyExpireAt).plus(1, ChronoUnit.HOURS));
+      flatFileWebSessionCache.cleanUp();
+      assertThat(isDirEmpty(dir)).isTrue();
+    } finally {
+      TimeMachine.useSystemDefaultZoneClock();
+    }
   }
 
   @Test
