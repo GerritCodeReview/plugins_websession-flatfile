@@ -77,16 +77,9 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   private final Path dir;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir Path dir) {
+  public FlatFileWebSessionCache(@WebSessionDir Path dir) throws IOException {
     this.dir = dir;
-    if (Files.notExists(dir)) {
-      log.atInfo().log("%s not found. Creating it.", dir);
-      try {
-        Files.createDirectory(dir);
-      } catch (IOException e) {
-        log.atSevere().withCause(e).log("Unable to create directory %s", dir);
-      }
-    }
+    Files.createDirectories(dir);
   }
 
   @Override
