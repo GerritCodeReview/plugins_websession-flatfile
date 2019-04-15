@@ -37,13 +37,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 public class FlatFileWebSessionCacheTest {
 
   private static final int DEFAULT_KEYS_SIZE = 10;
+
+  @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
 
   private FlatFileWebSessionCache flatFileWebSessionCache;
   private Path dir;
@@ -52,19 +55,10 @@ public class FlatFileWebSessionCacheTest {
 
   @Before
   public void createFlatFileWebSessionCache() throws Exception {
-    dir = Files.createTempDirectory("websessions");
+    dir = tempFolder.newFolder("websessions").toPath();
     key = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
     existingKey = "aSceprtBc02YaMY573T5jfW64ZudJfPbDq";
     flatFileWebSessionCache = new FlatFileWebSessionCache(dir);
-  }
-
-  @After
-  public void tearDown() throws Exception {
-    if (isDirEmpty(dir)) {
-      Files.deleteIfExists(dir);
-    } else {
-      emptyAndDelete(dir);
-    }
   }
 
   @Test
