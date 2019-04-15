@@ -32,6 +32,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +47,31 @@ import java.util.concurrent.ExecutionException;
 
 @Singleton
 public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
+  /** Provides static methods to set the system clock for testing purposes only. */
+  static class TimeMachine {
+    private static Clock clock = Clock.systemDefaultZone();
+
+    private TimeMachine() {
+      throw new IllegalAccessError("Utility class. Not meant to be instantiated.");
+    }
+
+    static Instant now() {
+      return Instant.now(getClock());
+    }
+
+    static void useFixedClockAt(Instant instant) {
+      clock = Clock.fixed(instant, ZoneId.systemDefault());
+    }
+
+    static void useSystemDefaultZoneClock() {
+      clock = Clock.systemDefaultZone();
+    }
+
+    private static Clock getClock() {
+      return clock;
+    }
+  }
+
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final Path dir;
@@ -77,9 +105,11 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   public void cleanUp() {
     for (Path path : listFiles()) {
       Val val = readFile(path);
-      long expires = val.getExpiresAt();
-      if (expires < System.currentTimeMillis()) {
-        deleteFile(path);
+      if (val != null) {
+        Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
+        if (expires.isBefore(TimeMachine.now())) {
+          deleteFile(path);
+        }
       }
     }
   }
