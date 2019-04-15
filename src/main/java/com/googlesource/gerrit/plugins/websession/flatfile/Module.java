@@ -24,7 +24,6 @@ import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCacheCleaner.CleanerLifecycle;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -34,7 +33,7 @@ public class Module extends LifecycleModule {
 
   @Override
   protected void configure() {
-    listener().to(CleanerLifecycle.class);
+    listener().to(FlatFileWebSessionCacheCleaner.class);
   }
 
   @Provides
