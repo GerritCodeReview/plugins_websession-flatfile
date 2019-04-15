@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.websession.flatfile;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
@@ -61,6 +62,7 @@ class FlatFileWebSessionCacheCleaner implements LifecycleListener {
 }
 
 class CleanupTask implements Runnable {
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final FlatFileWebSessionCache flatFileWebSessionCache;
   private final String pluginName;
 
@@ -72,7 +74,9 @@ class CleanupTask implements Runnable {
 
   @Override
   public void run() {
+    log.atInfo().log("Cleaning up expired file based websessions...");
     flatFileWebSessionCache.cleanUp();
+    log.atInfo().log("Cleaning up expired file based websessions...Done");
   }
 
   @Override
