@@ -94,6 +94,30 @@
       "revId": "87d10bd6400d5386041c6b61cb1875f5b9ce7224",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7060ad72_e3e32df7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2019-04-17T07:44:19Z",
+      "side": 1,
+      "message": "Due to an error-prone check:\n\n  bazel test --test_output\u003derrors //plugins/websession-flatfile:websession_flatfile_tests\n  INFO: Invocation ID: 92f95ae6-f137-42ee-b68e-d03c7ae3c872\n  INFO: Analysed target //plugins/websession-flatfile:websession_flatfile_tests (236 packages \n  loaded, 3683 targets configured).\n  INFO: Found 1 test target...\n  ERROR: /Users/xxx/gerrit/plugins/websession-flatfile/BUILD:22:1: Building plugins/websession-flatfile/websession_flatfile_tests-class.jar (2 source files) and running annotation processors (AutoAnnotationProcessor, AutoValueProcessor) failed (Exit 1)\n  plugins/websession-flatfile/src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java:110: error: [IncompatibleArgumentType] Argument \u0027path\u0027 should not be passed to this method. Its type Path is not compatible with the required type: String.\n    assertThat(flatFileWebSessionCache.getIfPresent(path)).isNull();\n                                                    ^\n    (see https://errorprone.info/bugpattern/IncompatibleArgumentType)\n  Target //plugins/websession-flatfile:websession_flatfile_tests failed to build\n  Use --verbose_failures to see the command lines of failed build steps.\n  INFO: Elapsed time: 27,496s, Critical Path: 7,63s\n  INFO: 237 processes: 228 remote cache hit, 5 darwin-sandbox, 4 worker.\n  FAILED: Build did NOT complete successfully\n\n  FAILED: Build did NOT complete successfully",
+      "parentUuid": "f34e3add_5cac7e62",
+      "range": {
+        "startLine": 109,
+        "startChar": 56,
+        "endLine": 109,
+        "endChar": 63
+      },
+      "revId": "87d10bd6400d5386041c6b61cb1875f5b9ce7224",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
