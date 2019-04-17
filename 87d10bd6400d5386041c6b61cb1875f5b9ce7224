@@ -118,6 +118,30 @@
       "revId": "87d10bd6400d5386041c6b61cb1875f5b9ce7224",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d676dd12_5dc59a3f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-17T07:52:52Z",
+      "side": 1,
+      "message": "OK, then it\u0027s better to update the commit message to clarify that it\u0027s not a test failure, but a compilation failure.\n\nI think this particular one depends on the version of bazel; later versions have a later version of errorprone which includes this check.",
+      "parentUuid": "7060ad72_e3e32df7",
+      "range": {
+        "startLine": 109,
+        "startChar": 56,
+        "endLine": 109,
+        "endChar": 63
+      },
+      "revId": "87d10bd6400d5386041c6b61cb1875f5b9ce7224",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
