@@ -16,104 +16,134 @@ package com.googlesource.gerrit.plugins.websession.flatfile;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.httpd.WebSessionManager.Val;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
+import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCache.TimeMachine;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.DirectoryStream;
-import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 public class FlatFileWebSessionCacheTest {
 
-  private static final int DEFAULT_KEYS_SIZE = 10;
+  private static final String EXISTING_KEY = "aSceprtBc02YaMY573T5jfW64ZudJfPbDq";
+  private static final String EMPTY_KEY = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
+  private static final String INVALID_KEY = "aOFdpHriBM6dN055M13PjDdTZagl5r5aSG";
+  private static final String NEW_KEY = "abcde12345";
 
-  private FlatFileWebSessionCache flatFileWebSessionCache;
-  private Path dir;
-  private String key;
-  private String existingKey;
+  @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
+
+  private FlatFileWebSessionCache cache;
+  private Path websessionDir;
 
   @Before
   public void createFlatFileWebSessionCache() throws Exception {
-    dir = Files.createTempDirectory("websessions");
-    key = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
-    existingKey = "aSceprtBc02YaMY573T5jfW64ZudJfPbDq";
-    flatFileWebSessionCache = new FlatFileWebSessionCache(dir);
-  }
-
-  @After
-  public void tearDown() throws Exception {
-    if (isDirEmpty(dir)) {
-      Files.deleteIfExists(dir);
-    } else {
-      emptyAndDelete(dir);
-    }
+    websessionDir = tempFolder.newFolder("websessions").toPath();
+    cache = new FlatFileWebSessionCache(websessionDir);
   }
 
   @Test
   public void asMapTest() throws Exception {
-    Files.createFile(dir.resolve(key));
-    assertThat(flatFileWebSessionCache.asMap()).isEmpty();
+    loadKeyToCacheDir(EMPTY_KEY);
+    assertThat(cache.asMap()).isEmpty();
 
-    loadExistingKeyToCacheDir();
-    assertThat(flatFileWebSessionCache.asMap()).containsKey(existingKey);
+    loadKeyToCacheDir(INVALID_KEY);
+    assertThat(cache.asMap()).isEmpty();
+
+    loadKeyToCacheDir(EXISTING_KEY);
+    assertThat(cache.asMap()).containsKey(EXISTING_KEY);
   }
 
   @Test
   public void constructorCreateDir() throws IOException {
-    Path testDir = Paths.get("tmp");
-    flatFileWebSessionCache = new FlatFileWebSessionCache(testDir);
-    assertThat(Files.exists(testDir)).isTrue();
-    Files.deleteIfExists(testDir);
+    assertThat(websessionDir.toFile().delete()).isTrue();
+    cache = new FlatFileWebSessionCache(websessionDir);
+    assertThat(websessionDir.toFile().exists()).isTrue();
   }
 
   @Test
   public void cleanUpTest() throws Exception {
-    loadExistingKeyToCacheDir();
-    flatFileWebSessionCache.cleanUp();
-    assertThat(isDirEmpty(dir)).isTrue();
+    loadKeyToCacheDir(EXISTING_KEY);
+    try {
+      long existingKeyExpireAt = cache.getIfPresent(EXISTING_KEY).getExpiresAt();
+      TimeMachine.useFixedClockAt(
+          Instant.ofEpochMilli(existingKeyExpireAt).minus(1, ChronoUnit.HOURS));
+      cache.cleanUp();
+      assertThat(isDirEmpty(websessionDir)).isFalse();
+
+      TimeMachine.useFixedClockAt(
+          Instant.ofEpochMilli(existingKeyExpireAt).plus(1, ChronoUnit.HOURS));
+      cache.cleanUp();
+      assertThat(isDirEmpty(websessionDir)).isTrue();
+    } finally {
+      TimeMachine.useSystemDefaultZoneClock();
+    }
   }
 
   @Test
-  public void getAllPresentTest() throws Exception {
-    Files.createFile(dir.resolve(key));
-    loadExistingKeyToCacheDir();
-    List<String> keys = Arrays.asList(new String[] {key, existingKey});
-    assertThat(flatFileWebSessionCache.getAllPresent(keys))
-        .containsKey(existingKey);
+  public void cleanUpWithErrorsWhileListingFilesTest() throws Exception {
+    tempFolder.delete();
+    cache.cleanUp();
+    assertThat(cache.size()).isEqualTo(0);
   }
 
   @Test
-  public void getIfPresentKeyDoesNotExistTest() throws Exception {
-    assertThat(flatFileWebSessionCache.getIfPresent(key)).isNull();
+  public void cleanUpWithErrorsWhileDeleteFileTest() throws Exception {
+    loadKeyToCacheDir(EXISTING_KEY);
+    try {
+      websessionDir.toFile().setWritable(false);
+      cache.cleanUp();
+      assertThat(cache.size()).isEqualTo(1);
+    } finally {
+      websessionDir.toFile().setWritable(true);
+    }
+  }
+
+  @Test
+  public void getIfPresentEmptyKeyTest() throws Exception {
+    assertThat(cache.getIfPresent(EMPTY_KEY)).isNull();
   }
 
   @Test
   public void getIfPresentObjectNonStringTest() throws Exception {
-    Path path = dir.resolve(key);
-    assertThat(flatFileWebSessionCache.getIfPresent(path)).isNull();
+    assertThat(cache.getIfPresent(new Object())).isNull();
+  }
+
+  @Test
+  public void getIfPresentInvalidKeyTest() throws Exception {
+    loadKeyToCacheDir(INVALID_KEY);
+    Path path = websessionDir.resolve(INVALID_KEY);
+    assertThat(cache.getIfPresent(path.toString())).isNull();
   }
 
   @Test
   public void getIfPresentTest() throws Exception {
-    loadExistingKeyToCacheDir();
-    assertThat(flatFileWebSessionCache.getIfPresent(existingKey)).isNotNull();
+    loadKeyToCacheDir(EXISTING_KEY);
+    assertThat(cache.getIfPresent(EXISTING_KEY)).isNotNull();
+  }
+
+  @Test
+  public void getAllPresentTest() throws Exception {
+    loadKeyToCacheDir(EMPTY_KEY);
+    loadKeyToCacheDir(INVALID_KEY);
+    loadKeyToCacheDir(EXISTING_KEY);
+    List<String> keys = ImmutableList.of(EMPTY_KEY, EXISTING_KEY);
+    assertThat(cache.getAllPresent(keys).size()).isEqualTo(1);
+    assertThat(cache.getAllPresent(keys)).containsKey(EXISTING_KEY);
   }
 
   @Test
@@ -124,12 +154,10 @@ public class FlatFileWebSessionCacheTest {
         return null;
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
-        .isNull();
+    assertThat(cache.get(EXISTING_KEY, new ValueLoader())).isNull();
 
-    loadExistingKeyToCacheDir();
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
-        .isNotNull();
+    loadKeyToCacheDir(EXISTING_KEY);
+    assertThat(cache.get(EXISTING_KEY, new ValueLoader())).isNotNull();
   }
 
   @Test(expected = ExecutionException.class)
@@ -140,95 +168,94 @@ public class FlatFileWebSessionCacheTest {
         throw new Exception();
       }
     }
-    assertThat(flatFileWebSessionCache.get(existingKey, new ValueLoader()))
-        .isNull();
+    assertThat(cache.get(EXISTING_KEY, new ValueLoader())).isNull();
   }
 
   @Test
   public void invalidateAllCollectionTest() throws Exception {
-    List<String> keys = createKeysCollection();
-    flatFileWebSessionCache.invalidateAll(keys);
-    assertThat(isDirEmpty(dir)).isTrue();
+    int numberOfKeys = 15;
+    List<String> keys = loadKeysToCacheDir(numberOfKeys);
+    assertThat(cache.size()).isEqualTo(numberOfKeys);
+    assertThat(isDirEmpty(websessionDir)).isFalse();
+
+    cache.invalidateAll(keys);
+    assertThat(cache.size()).isEqualTo(0);
+    assertThat(isDirEmpty(websessionDir)).isTrue();
   }
 
   @Test
   public void invalidateAllTest() throws Exception {
-    createKeysCollection();
-    flatFileWebSessionCache.invalidateAll();
-    assertThat(isDirEmpty(dir)).isTrue();
+    int numberOfKeys = 5;
+    loadKeysToCacheDir(numberOfKeys);
+    assertThat(cache.size()).isEqualTo(numberOfKeys);
+    assertThat(isDirEmpty(websessionDir)).isFalse();
+
+    cache.invalidateAll();
+    assertThat(cache.size()).isEqualTo(0);
+    assertThat(isDirEmpty(websessionDir)).isTrue();
   }
 
   @Test
   public void invalidateTest() throws Exception {
-    Path fileToDelete = Files.createFile(dir.resolve(key));
+    Path fileToDelete = Files.createFile(websessionDir.resolve(EXISTING_KEY));
     assertThat(Files.exists(fileToDelete)).isTrue();
-    flatFileWebSessionCache.invalidate(key);
+    cache.invalidate(EXISTING_KEY);
     assertThat(Files.exists(fileToDelete)).isFalse();
   }
 
   @Test
   public void invalidateTestObjectNotString() throws Exception {
-    createKeysCollection();
-    assertThat(flatFileWebSessionCache.size()).isEqualTo(DEFAULT_KEYS_SIZE);
-    flatFileWebSessionCache.invalidate(new Object());
-    assertThat(flatFileWebSessionCache.size()).isEqualTo(DEFAULT_KEYS_SIZE);
+    loadKeyToCacheDir(EXISTING_KEY);
+    assertThat(cache.size()).isEqualTo(1);
+    cache.invalidate(new Object());
+    assertThat(cache.size()).isEqualTo(1);
   }
 
   @Test
   public void putTest() throws Exception {
-    loadExistingKeyToCacheDir();
-    Val val = flatFileWebSessionCache.getIfPresent(existingKey);
-    String newKey = "abcde12345";
-    flatFileWebSessionCache.put(newKey, val);
-    assertThat(flatFileWebSessionCache.getIfPresent(newKey)).isNotNull();
+    loadKeyToCacheDir(EXISTING_KEY);
+    Val val = cache.getIfPresent(EXISTING_KEY);
+    cache.put(NEW_KEY, val);
+    assertThat(cache.getIfPresent(NEW_KEY)).isNotNull();
   }
 
   @Test
   public void putAllTest() throws Exception {
-    loadExistingKeyToCacheDir();
-    Val val = flatFileWebSessionCache.getIfPresent(existingKey);
-    String newKey = "abcde12345";
-    Map<String, Val> sessions = ImmutableMap.of(newKey, val);
-    flatFileWebSessionCache.putAll(sessions);
-    assertThat(flatFileWebSessionCache.asMap()).containsKey(newKey);
+    loadKeyToCacheDir(EXISTING_KEY);
+    Val val = cache.getIfPresent(EXISTING_KEY);
+    Map<String, Val> sessions = ImmutableMap.of(NEW_KEY, val);
+    cache.putAll(sessions);
+    assertThat(cache.asMap()).containsKey(NEW_KEY);
+  }
+
+  @Test
+  public void putWithErrorsTest() throws Exception {
+    loadKeyToCacheDir(EXISTING_KEY);
+    Val val = cache.getIfPresent(EXISTING_KEY);
+    tempFolder.delete();
+    cache.put(NEW_KEY, val);
+    assertThat(cache.getIfPresent(NEW_KEY)).isNull();
   }
 
   @Test
   public void sizeTest() throws Exception {
-    createKeysCollection();
-    assertThat(flatFileWebSessionCache.size()).isEqualTo(DEFAULT_KEYS_SIZE);
+    int numberOfKeys = 10;
+    loadKeysToCacheDir(numberOfKeys);
+    assertThat(cache.size()).isEqualTo(numberOfKeys);
   }
 
   @Test
   public void statTest() throws Exception {
-    assertThat(flatFileWebSessionCache.stats()).isNull();
+    assertThat(cache.stats()).isNull();
   }
 
-  private List<String> createKeysCollection() throws IOException {
+  private List<String> loadKeysToCacheDir(int number) throws IOException {
     List<String> keys = new ArrayList<>();
-    for (int i = 0; i < DEFAULT_KEYS_SIZE; i++) {
-      Path tmp = Files.createTempFile(dir, "cache", null);
+    for (int i = 0; i < number; i++) {
+      Path tmp = Files.createTempFile(websessionDir, "cache", null);
       keys.add(tmp.getFileName().toString());
     }
     return keys;
-  }
-
-  private void emptyAndDelete(Path dir) throws IOException {
-    Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
-      @Override
-      public FileVisitResult postVisitDirectory(Path dir, IOException exc)
-          throws IOException {
-        Files.delete(dir);
-        return FileVisitResult.CONTINUE;
-      }
-
-      @Override
-      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-          throws IOException {
-        Files.delete(file);
-        return FileVisitResult.CONTINUE;
-      }
-    });
   }
 
   private boolean isDirEmpty(final Path dir) throws IOException {
@@ -237,10 +264,15 @@ public class FlatFileWebSessionCacheTest {
     }
   }
 
-  private void loadExistingKeyToCacheDir() throws IOException {
-    InputStream in = loadFile(existingKey);
-    Path target = dir.resolve(existingKey);
-    Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+  private Path loadKeyToCacheDir(String key) throws IOException {
+    if (key.equals(EMPTY_KEY)) {
+      return Files.createFile(websessionDir.resolve(EMPTY_KEY));
+    }
+    try (InputStream in = loadFile(key)) {
+      Path target = websessionDir.resolve(key);
+      Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+      return target;
+    }
   }
 
   private InputStream loadFile(String file) {
