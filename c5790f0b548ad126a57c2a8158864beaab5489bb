@@ -211,6 +211,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed9dc6d2_6a353f06",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-15T22:38:56Z",
+      "side": 1,
+      "message": "I tried to get it so that https://github.com/GerritCodeReview/gerrit/blob/master/java/com/google/gerrit/server/cache/h2/H2CacheImpl.java would try and fetch the user from the h2 cache disk file but failed. (this was a long while ago so i doin\u0027t remember exactly what i did :()\n\nI also tried to support it in https://github.com/GerritCodeReview/gerrit/blob/master/java/com/google/gerrit/httpd/WebSessionManager.java but also failed (again did this a while ago).",
+      "parentUuid": "efcb9490_0ac9f658",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 37
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
