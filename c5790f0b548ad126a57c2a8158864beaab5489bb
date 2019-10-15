@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f776216f_4fbc58c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T21:18:32Z",
+      "side": 1,
+      "message": "invalidate() will do since java is typed.",
+      "range": {
+        "startLine": 153,
+        "startChar": 14,
+        "endLine": 153,
+        "endChar": 36
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9d9a495_6064cb89",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T21:18:32Z",
+      "side": 1,
+      "message": "account (since keys mean something different in this file)",
+      "range": {
+        "startLine": 153,
+        "startChar": 48,
+        "endLine": 153,
+        "endChar": 51
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3dfdc1a_4ba0ad00",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T21:18:32Z",
+      "side": 1,
+      "message": "Call invalidate(Object Key) here instead?",
+      "range": {
+        "startLine": 156,
+        "startChar": 8,
+        "endLine": 156,
+        "endChar": 18
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
