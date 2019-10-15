@@ -14,6 +14,7 @@ gerrit_plugin(
         "Gerrit-PluginName: websession-flatfile",
         "Gerrit-Module: com.googlesource.gerrit.plugins.websession.flatfile.Module",
         "Gerrit-HttpModule: com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSession$Module",
+        "Gerrit-SshModule: com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionsCommandModule",
         "Implementation-Title: Flat file WebSession",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/websession-flatfile",
     ],
