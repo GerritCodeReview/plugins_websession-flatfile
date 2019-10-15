@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "07682740_0119354f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-15T21:26:52Z",
+      "side": 1,
+      "message": "Thanks, done.",
+      "parentUuid": "f776216f_4fbc58c8",
+      "range": {
+        "startLine": 153,
+        "startChar": 14,
+        "endLine": 153,
+        "endChar": 36
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "664ffee5_fb07cbcb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-15T21:26:52Z",
+      "side": 1,
+      "message": "Thanks, done.",
+      "parentUuid": "a9d9a495_6064cb89",
+      "range": {
+        "startLine": 153,
+        "startChar": 48,
+        "endLine": 153,
+        "endChar": 51
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3dfdc1a_4ba0ad00",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12495ed3_cc658047",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-15T21:26:52Z",
+      "side": 1,
+      "message": "Thanks, done.",
+      "parentUuid": "b3dfdc1a_4ba0ad00",
+      "range": {
+        "startLine": 156,
+        "startChar": 8,
+        "endLine": 156,
+        "endChar": 18
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
