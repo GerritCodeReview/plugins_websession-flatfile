@@ -150,6 +150,14 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
     }
   }
 
+  public void invalidateSpecificUser(Account.Id key) {
+    for (Path path : listFiles()) {
+      if (readFile(path).getAccountId().get() == key.get()) {
+        deleteFile(path);
+      }
+    }
+  }
+
   @Override
   public void invalidateAll() {
     for (Path path : listFiles()) {
