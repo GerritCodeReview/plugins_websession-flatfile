@@ -259,6 +259,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "164f035c_6ca827f6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-17T21:38:37Z",
+      "side": 1,
+      "message": "Thanks, so i\u0027m stuck at the bit where you get all keys and then get the account key from it.\n\nE.g in this plugin we do:\n\n\n  public void invalidate(Account.Id account) {\n    for (Path path : listFiles()) {\n      if (readFile(path).getAccountId().get() \u003d\u003d account.get()) {\n        invalidate(Object account);\n      }\n    }\n  }\n\nwhich calls:\n\n  private Val readFile(Path path) {\n    if (path.toFile().exists()) {\n      try (InputStream fileStream \u003d Files.newInputStream(path);\n          ObjectInputStream objStream \u003d new ObjectInputStream(fileStream)) {\n        return (Val) objStream.readObject();\n      } catch (ClassNotFoundException e) {\n        log.warn(\n            \"Entry \"\n                + path\n                + \" in cache \"\n                + websessionsDir\n                + \" has an incompatible \"\n                + \"class and can\u0027t be deserialized. Invalidating entry.\");\n        invalidate(path.getFileName().toString());\n      } catch (IOException e) {\n        log.warn(\"Cannot read cache \" + websessionsDir, e);\n      }\n    }\n    return null;\n  }\n\n\nI\u0027m not sure how to do this in gerrit\u0027s core for H2CacheImpl, any ideas how?",
+      "parentUuid": "743cdd49_6e64943d",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 37
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
