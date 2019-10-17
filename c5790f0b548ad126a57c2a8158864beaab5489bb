@@ -379,6 +379,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a41f8efa_3632bbd4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-17T22:32:34Z",
+      "side": 1,
+      "message": "I have something like:\n\nhttps://phabricator.wikimedia.org/P9384\n\nWhich  builds, but when gerrit starts up it fails with:\n\n1) Could not find a suitable constructor in com.google.gerrit.extensions.registration.DynamicItem. Classes must have either one (and only one) constructor annotated with @Inject or a zero-argument constructor that is not private.\n  at com.google.gerrit.extensions.registration.DynamicItem.class(DynamicItem.java:37)\n  while locating com.google.gerrit.extensions.registration.DynamicItem\u003ccom.google.gerrit.httpd.WebSession\u003e\n    for the 5th parameter of com.google.gerrit.server.cache.h2.H2CacheFactory.\u003cinit\u003e(H2CacheFactory.java:73)\n  at com.google.gerrit.server.cache.h2.H2CacheModule.configure(H2CacheModule.java:26)\n\n1 error\n\tat com.google.inject.internal.Errors.throwCreationExceptionIfErrorsExist(Errors.java:543)\n\tat com.google.inject.internal.InternalInjectorCreator.initializeStatically(InternalInjectorCreator.java:159)\n\tat com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:106)\n\tat com.google.inject.internal.InjectorImpl.createChildInjector(InjectorImpl.java:237)\n\tat com.google.gerrit.pgm.Daemon.createSysInjector(Daemon.java:483)\n\tat com.google.gerrit.pgm.Daemon.start(Daemon.java:331)\n\tat com.google.gerrit.pgm.Daemon.run(Daemon.java:254)\n\tat com.google.gerrit.pgm.util.AbstractProgram.main(AbstractProgram.java:61)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat com.google.gerrit.launcher.GerritLauncher.invokeProgram(GerritLauncher.java:224)\n\tat com.google.gerrit.launcher.GerritLauncher.mainImpl(GerritLauncher.java:120)\n\tat com.google.gerrit.launcher.GerritLauncher.main(GerritLauncher.java:65)\n\tat Main.main(Main.java:28)\n\n\n\n\nI\u0027m not sure how i would use WebSessionManager in there.",
+      "parentUuid": "7b0e9bdf_4610e8f8",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 37
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
