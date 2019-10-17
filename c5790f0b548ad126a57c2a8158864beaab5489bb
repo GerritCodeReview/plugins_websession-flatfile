@@ -427,6 +427,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8ce59df_0185755f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-17T23:00:45Z",
+      "side": 1,
+      "message": "Ah, trying to bind WebSession there results in:\n\ngerrit/java/com/google/gerrit/server/restapi/BUILD:7:1: in java_library rule //java/com/google/gerrit/server/restapi:restapi: cycle in dependency graph:\n    //:release\n    //plugins:core\n    //plugins/plugin-manager:plugin-manager.jar\n    //plugins/plugin-manager:plugin-manager\n    //plugins/plugin-manager:plugin-manager__non_stamped_deploy.jar\n    //plugins/plugin-manager:plugin-manager__non_stamped\n    //plugins/plugin-manager:plugin-manager__plugin\n    //plugins:plugin-lib-neverlink\n    //java/com/google/gerrit/sshd:sshd\n.-\u003e //java/com/google/gerrit/server/restapi:restapi\n|   //java/com/google/gerrit/httpd:httpd\n`-- //java/com/google/gerrit/server/restapi:restapi\n\n\nBecause i had to bind the httpd folder in there.",
+      "parentUuid": "8c8ac588_62c63ea1",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 37
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
