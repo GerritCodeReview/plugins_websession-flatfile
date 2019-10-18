@@ -451,6 +451,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc8b73ad_73684d9b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-10-18T23:24:14Z",
+      "side": 1,
+      "message": "I figured out a hackish behavour to test this. But i\u0027m now stuck on adding a method to H2CacheImpl which can be used by rsrc.getCache().\n\nThis is because i carn\u0027t import H2CacheImpl into FlushCache and i carn\u0027t import WebSessionManager either.\n\n\nmy hack was doing:\n\n  void stop() {\n    for (Map.Entry\u003cK, ValueHolder\u003cV\u003e\u003e e : mem.asMap().entrySet()) {\n      ValueHolder\u003cV\u003e h \u003d e.getValue();\n      System.out.println(e.getValue().toString());\n      System.out.println(e.getKey().toString());\n      Object test \u003d getIfPresent(e.getKey());\n      WebSessionManager.Val test2 \u003d (WebSessionManager.Val) test;\n      System.out.println(test2.getAccountId().get());\n      //System.out.println(readVarInt32(e.getValue().toString()));\n      //System.out.println(readVarInt32(e.getKey().toString()));\n      //mem.invalidate(e.getValue());\n      //invalidate(e.getKey());\n      if (!h.clean) {\n        //invalidate(e.getKey());\n        store.put(e.getKey(), h);\n      }\n    }\n\n\nWhich outputted number 1 (the admin class) when i stopped gerrit.\n\nWould you know how i can do this so that we can use the method in the class?",
+      "parentUuid": "b8ce59df_0185755f",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 37
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
