@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7971e140_fb203a59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-19T16:50:12Z",
+      "side": 1,
+      "message": "don\u0027t",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "eb6e8076d4392cae193b90f34e8b4f38b5883044",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef41308c_0e756aa5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-19T16:50:12Z",
+      "side": 1,
+      "message": "This could be quite expensive: if you have tens of thousands of active sessions you may end up reading them all.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 3
+      },
+      "revId": "eb6e8076d4392cae193b90f34e8b4f38b5883044",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb43c1a6_ba20637c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-19T16:50:12Z",
+      "side": 1,
+      "message": "Really? If you kick everyone out you could actually kill the Gerrit server, as everyone will then try to log back in at the same time.",
+      "range": {
+        "startLine": 56,
+        "startChar": 17,
+        "endLine": 56,
+        "endChar": 69
+      },
+      "revId": "eb6e8076d4392cae193b90f34e8b4f38b5883044",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
