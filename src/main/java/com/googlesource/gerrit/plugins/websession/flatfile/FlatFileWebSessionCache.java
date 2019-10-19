@@ -76,6 +76,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   }
 
   private final Path websessionsDir;
+  private final Map<String, Val> mem = new ConcurrentHashMap<>();
 
   @Inject
   public FlatFileWebSessionCache(@WebSessionDir Path websessionsDir) throws IOException {
@@ -136,8 +137,12 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   @Override
   @Nullable
   public Val getIfPresent(Object key) {
-    if (key instanceof String) {
+    if (key instanceof Integer) {
+      if (mem.get(key) != null) {
+        return mem.get(key);
+      }
       Path path = websessionsDir.resolve((String) key);
+      mem.put(key, readFile(path));
       return readFile(path);
     }
     return null;
