@@ -475,6 +475,30 @@
       "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0964de5d_e216931c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/LogUsersOutCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-21T15:58:25Z",
+      "side": 1,
+      "message": "I don\u0027t know how to do this, I would send an email to the mailing list or add more people to this review. It looks like you will need to modify core to make the ssh context able to logout websessions, which seems like a reasonable thing to want to do, so see if you can get more help there.",
+      "parentUuid": "fc8b73ad_73684d9b",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 37
+      },
+      "revId": "c5790f0b548ad126a57c2a8158864beaab5489bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
