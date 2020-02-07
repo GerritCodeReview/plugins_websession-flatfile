@@ -97,12 +97,16 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   @Override
   public void cleanUp() {
     for (Path path : listFiles()) {
-      Val val = readFile(path);
-      if (val != null) {
-        Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
-        if (expires.isBefore(TimeMachine.now())) {
-          deleteFile(path);
+      try {
+        Val val = readFile(path);
+        if (val != null) {
+          Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
+          if (expires.isBefore(TimeMachine.now())) {
+            deleteFile(path);
+          }
         }
+      } catch (Exception e) {
+        log.atWarning().withCause(e).log("Exception while cleaning %s", path);
       }
     }
   }

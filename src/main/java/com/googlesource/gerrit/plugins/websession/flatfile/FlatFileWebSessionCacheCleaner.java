@@ -48,7 +48,13 @@ class FlatFileWebSessionCacheCleaner implements LifecycleListener {
     @Override
     public void run() {
       log.atInfo().log("Cleaning up expired file based websessions...");
-      flatFileWebSessionCache.cleanUp();
+      try {
+        flatFileWebSessionCache.cleanUp();
+      } catch (Exception e) {
+        // log and do not prevent subsequent scheduled tasks from running
+        // see https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ScheduledThreadPoolExecutor.html#scheduleAtFixedRate(java.lang.Runnable,%20long,%20long,%20java.util.concurrent.TimeUnit)
+        log.atWarning().withCause(e).log("Exception during cleaning sessions");
+      }
       log.atInfo().log("Cleaning up expired file based websessions...Done");
     }
 
