@@ -22,6 +22,30 @@
       "revId": "2f6ae90e3132f852bd689f20c84f3711852d14f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b6d762f_2b598c2d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-15T21:55:03Z",
+      "side": 1,
+      "message": "I think that would also be good, but it\u0027s not the intent here. The intent is to ensure nothing in run() throws exceptions. Perhaps the loggers should go inside the try to show that clearer?",
+      "parentUuid": "8fa44527_388a22ab",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 14
+      },
+      "revId": "2f6ae90e3132f852bd689f20c84f3711852d14f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
