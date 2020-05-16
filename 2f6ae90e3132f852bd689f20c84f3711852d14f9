@@ -46,6 +46,30 @@
       "revId": "2f6ae90e3132f852bd689f20c84f3711852d14f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0738dc50_40277b97",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheCleaner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-16T01:29:20Z",
+      "side": 1,
+      "message": "I think that the bigger intent should be fixed in core since core wraps all runnables in a Task, it could catch these exceptions for everyone. The problem here is that with this fix, you still are likely to get stuck and potentially be worse off trying to cleanup something uncleanable over and over.",
+      "parentUuid": "9b6d762f_2b598c2d",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 14
+      },
+      "revId": "2f6ae90e3132f852bd689f20c84f3711852d14f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
