@@ -21,6 +21,7 @@ import com.google.gerrit.httpd.WebSession;
 import com.google.gerrit.httpd.WebSessionManagerFactory;
 import com.google.gerrit.server.AnonymousUser;
 import com.google.gerrit.server.IdentifiedUser.RequestFactory;
+import com.google.gerrit.server.account.AccountCache;
 import com.google.gerrit.server.config.AuthConfig;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -51,13 +52,15 @@ public class FlatFileWebSession extends CacheBasedWebSession {
       FlatFileWebSessionCache cache,
       AuthConfig authConfig,
       Provider<AnonymousUser> anonymousProvider,
-      RequestFactory identified) {
+      RequestFactory identified,
+      AccountCache byIdCache) {
     super(
         request.get(),
         response.get(),
         managerFactory.create(cache),
         authConfig,
         anonymousProvider,
-        identified);
+        identified,
+        byIdCache);
   }
 }
