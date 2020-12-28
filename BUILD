@@ -22,6 +22,7 @@ gerrit_plugin(
 junit_tests(
     name = "websession_flatfile_tests",
     srcs = glob(["src/test/java/**/*.java"]),
+    javacopts = ["-Xep:DoNotMock:OFF"],
     resources = glob(["src/test/resources/**/*"]),
     tags = ["websession-flatfile"],
     deps = [
