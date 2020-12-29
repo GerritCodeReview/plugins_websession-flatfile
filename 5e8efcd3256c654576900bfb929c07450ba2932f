@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2591d8_d771dd00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-12-29T17:52:21Z",
+      "side": 1,
+      "message": "This won\u0027t fix the in-tree build though :-(\nAlternative approach: why not fixing the mocking in the code and leave the check on errorprone?",
+      "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
