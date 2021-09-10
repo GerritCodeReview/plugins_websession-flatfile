@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0ce7e9_301931e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1087826
+      },
+      "writtenOn": "2021-09-10T01:42:55Z",
+      "side": 1,
+      "message": "This is an alternative to https://gerrit-review.googlesource.com/c/zuul/config/+/317682\nIt has the following advantages:\n                                                                                \n* The plugin branch to gerrit branch mapping is contained within this repo, so if/when that changes, it can be updated at the same time as code changes are made, and doesn\u0027t require review in a second repo.\n* It is self-testing (once we add this project to Zuul\u0027s configuration, this change will actually run the jobs listed here).  That means we can add new branches and immediately see if the build passes/fails before merging the change that adds the build.\n* It takes advantage of the in-repo config to keep the config simple.  These jobs will only run on this branch; we will write similar configs on the other 2 branches but only list the jobs relevant to those branches.\n\nThe disadvantage is that we can\u0027t make one change to apply a new job to many\nrepos at once.\n",
+      "revId": "6c26986b6b17673e6f56f558a45413de8a0a37de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
