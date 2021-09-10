@@ -1,0 +1,10 @@
+# This branch supports several current gerrit branches.  Use a
+# project-template for each branch.
+
+- project:
+    templates:
+      - non-core-plugin-master
+      - non-core-plugin-stable-3.4
+      - non-core-plugin-stable-3.3
+      - non-core-plugin-stable-3.2
+      - non-core-plugin-stable-2.16
