@@ -4,32 +4,32 @@
 
 - job:
     name: plugins-websession-flatfile-build-master
-    parent: gerrit-blugin-build
+    parent: gerrit-plugin-build
 
 - job:
     name: plugins-websession-flatfile-build-stable-3.4
-    parent: gerrit-blugin-build
+    parent: gerrit-plugin-build
     required-projects:
       - name: gerrit
         override-checkout: stable-3.4
 
 - job:
     name: plugins-websession-flatfile-build-stable-3.3
-    parent: gerrit-blugin-build
+    parent: gerrit-plugin-build
     required-projects:
       - name: gerrit
         override-checkout: stable-3.3
 
 - job:
     name: plugins-websession-flatfile-build-stable-3.2
-    parent: gerrit-blugin-build
+    parent: gerrit-plugin-build
     required-projects:
       - name: gerrit
         override-checkout: stable-3.2
 
 - job:
     name: plugins-websession-flatfile-build-stable-2.16
-    parent: gerrit-blugin-build
+    parent: gerrit-plugin-build
     required-projects:
       - name: gerrit
         override-checkout: stable-2.16
