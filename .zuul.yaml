@@ -1,0 +1,18 @@
+# This branch only supports a single version of Gerrit, so no special
+# jobs are needed.  But other branches support multiple versions, so
+# we define our own job with a distinct name just to avoid confusion.
+
+- job:
+    name: plugins-websession-flatfile-build-stable-2.14
+    parent: gerrit-plugin-build
+
+- project:
+    check:
+      jobs:
+        - plugins-websession-flatfile-build-stable-2.14
+    post:
+      jobs:
+        - plugins-websession-flatfile-build-stable-2.14
+        - gerrit-plugin-publish:
+            dependencies:
+              - plugins-websession-flatfile-build-stable-2.14
