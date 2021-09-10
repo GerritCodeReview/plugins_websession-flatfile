@@ -1,0 +1,58 @@
+# This branch supports several current gerrit branches.  Define a
+# plugin build job for each of them that specifies the branch of
+# Gerrit that should be checked out.
+
+- job:
+    name: plugins-websession-flatfile-build-master
+    parent: gerrit-plugin-build
+
+- job:
+    name: plugins-websession-flatfile-build-stable-3.4
+    parent: gerrit-plugin-build
+    required-projects:
+      - name: gerrit
+        override-checkout: stable-3.4
+
+- job:
+    name: plugins-websession-flatfile-build-stable-3.3
+    parent: gerrit-plugin-build
+    required-projects:
+      - name: gerrit
+        override-checkout: stable-3.3
+
+- job:
+    name: plugins-websession-flatfile-build-stable-3.2
+    parent: gerrit-plugin-build
+    required-projects:
+      - name: gerrit
+        override-checkout: stable-3.2
+
+- job:
+    name: plugins-websession-flatfile-build-stable-2.16
+    parent: gerrit-plugin-build
+    required-projects:
+      - name: gerrit
+        override-checkout: stable-2.16
+
+- project:
+    check:
+      jobs:
+        - plugins-websession-flatfile-build-master
+        - plugins-websession-flatfile-build-stable-3.4
+        - plugins-websession-flatfile-build-stable-3.3
+        - plugins-websession-flatfile-build-stable-3.2
+        - plugins-websession-flatfile-build-stable-2.16
+    post:
+      jobs:
+        - plugins-websession-flatfile-build-master
+        - plugins-websession-flatfile-build-stable-3.4
+        - plugins-websession-flatfile-build-stable-3.3
+        - plugins-websession-flatfile-build-stable-3.2
+        - plugins-websession-flatfile-build-stable-2.16
+        - gerrit-plugin-publish:
+            dependencies:
+              - plugins-websession-flatfile-build-master
+              - plugins-websession-flatfile-build-stable-3.4
+              - plugins-websession-flatfile-build-stable-3.3
+              - plugins-websession-flatfile-build-stable-3.2
+              - plugins-websession-flatfile-build-stable-2.16
