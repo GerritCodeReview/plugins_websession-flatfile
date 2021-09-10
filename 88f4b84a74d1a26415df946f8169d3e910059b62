@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5341328_14ddc830",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1087826
+      },
+      "writtenOn": "2021-09-10T00:30:49Z",
+      "side": 1,
+      "message": "This series is an in-repo alternative to https://gerrit-review.googlesource.com/317644 which accomplishes something similar, but with out-of-repo config.\n\nThe advantage to this approach is that the CI config is kept closer to the code itself so as this plugin supports more gerrit versions, the jobs can be updated at the same time.  The config is also evaluated dynamically, so changes to add jobs for new versions are self-testing.",
+      "revId": "88f4b84a74d1a26415df946f8169d3e910059b62",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
