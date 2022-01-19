@@ -47,6 +47,46 @@ Time intervals smaller than one hour are not supported.
 If 'cleanupInterval' is not present in the configuration, the
 cleanup operation is triggered every 24 hours.
 
+### Cleanup gotchas
+
+The cleanUp routine performs an initial filtering by only considering session
+files that have been created longer than `cache.web_sessions.maxAge` ago, and
+thus represents sessions that are likely to be expired.
+
+Each candidate file is then read from disk and deserialized so that the session
+validity can be tested by looking at its `expiresAt` value.
+
+Only sessions that are _actually_ expired are then removed from disk.
+
+Note that this is based on the _current_ value of `cache.web_sessions.maxAge`,
+rather than its value _at the time_ the session was created.
+
+If the value of `cache.web_sessions.maxAge` is changed by a Gerrit admin, then
+two different scenarios arise, depending on whether maxAge was increased or
+decreased.
+
+#### maxAge is decreased
+
+1. `cache.web_sessions.maxAge = 10 days`
+2. *1st of January*: user Jane creates a session.
+3. *1st of January*: Gerrit admin sets `cache.web_sessions.maxAge = 1 day` and
+   restarts Gerrit.
+4. *2nd of January*: CleanUp loads and inspects Jane's session file, however the
+   file is kept on disk until the *11th of January*, since Jane's session is
+   still valid.
+
+#### maxAge is increased
+
+1. `cache.web_sessions.maxAge = 1 day`
+2. *1st of January*: user Jane creates a session.
+3. *1st of January*: Gerrit admin sets `cache.web_sessions.maxAge = 10 days` and
+   restarts Gerrit.
+4. *2nd of January*: CleanUp does not load nor inspect Jane's session file, so
+   the file is kept on disk until the *11th of January*.
+
+*NOTE*: this has no effect on the session validity: the session _itself_ is
+expired (i.e. its `expiresAt` value is still based on `maxAge = 1 day`) and thus
+Jane will need acquire a new session as she would have, had `maxAge` not changed
 
 SEE ALSO
 --------

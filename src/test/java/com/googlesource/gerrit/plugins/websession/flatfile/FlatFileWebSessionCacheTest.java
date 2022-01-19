@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.httpd.WebSessionManager.CACHE_NAME;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -26,6 +27,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileTime;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,6 +47,7 @@ public class FlatFileWebSessionCacheTest {
   private static final String EMPTY_KEY = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
   private static final String INVALID_KEY = "aOFdpHriBM6dN055M13PjDdTZagl5r5aSG";
   private static final String NEW_KEY = "abcde12345";
+  private static final Integer MAX_AGE_HOURS = 6;
 
   @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
 
@@ -53,7 +57,9 @@ public class FlatFileWebSessionCacheTest {
   @Before
   public void createFlatFileWebSessionCache() throws Exception {
     websessionDir = tempFolder.newFolder("websessions").toPath();
-    cache = new FlatFileWebSessionCache(websessionDir);
+    Config config = new Config();
+    config.setString("cache", CACHE_NAME, "maxAge", String.format("%dh", MAX_AGE_HOURS));
+    cache = new FlatFileWebSessionCache(websessionDir, config);
   }
 
   @Test
@@ -71,24 +77,59 @@ public class FlatFileWebSessionCacheTest {
   @Test
   public void constructorCreateDir() throws IOException {
     assertThat(websessionDir.toFile().delete()).isTrue();
-    cache = new FlatFileWebSessionCache(websessionDir);
+    cache = new FlatFileWebSessionCache(websessionDir, new Config());
     assertThat(websessionDir.toFile().exists()).isTrue();
   }
 
   @Test
-  public void cleanUpTest() throws Exception {
-    loadKeyToCacheDir(EXISTING_KEY);
+  public void cleanUpShouldDeleteWhenFileIsExpiredAndSessionIsExpired() throws Exception {
+    Path webSessionFile = loadKeyToCacheDir(EXISTING_KEY);
+    long existingKeyExpireAt = cache.getIfPresent(EXISTING_KEY).getExpiresAt();
+
     try {
+      TimeMachine.useFixedClockAt(
+          Instant.ofEpochMilli(existingKeyExpireAt).plus(MAX_AGE_HOURS + 1, ChronoUnit.HOURS));
+      makeExpire(webSessionFile);
+
+      cache.cleanUp();
+
+      assertThat(isDirEmpty(websessionDir)).isTrue();
+    } finally {
+      TimeMachine.useSystemDefaultZoneClock();
+    }
+  }
+
+  @Test
+  public void cleanUpShouldKeepWhenFileIsExpiredButSessionIsValid() throws Exception {
+    try {
+      Path webSessionFile = loadKeyToCacheDir(EXISTING_KEY);
       long existingKeyExpireAt = cache.getIfPresent(EXISTING_KEY).getExpiresAt();
+
       TimeMachine.useFixedClockAt(
           Instant.ofEpochMilli(existingKeyExpireAt).minus(1, ChronoUnit.HOURS));
+      makeExpire(webSessionFile);
+
+      cache.cleanUp();
+
+      assertThat(isDirEmpty(websessionDir)).isFalse();
+
+    } finally {
+      TimeMachine.useSystemDefaultZoneClock();
+    }
+  }
+
+  @Test
+  public void cleanUpShouldKeepWhenFileIsValidAndSessionIsValid() throws Exception {
+    try {
+      loadKeyToCacheDir(EXISTING_KEY);
+      long existingKeyExpireAt = cache.getIfPresent(EXISTING_KEY).getExpiresAt();
+
+      TimeMachine.useFixedClockAt(
+          Instant.ofEpochMilli(existingKeyExpireAt).minus(1, ChronoUnit.HOURS));
+
       cache.cleanUp();
       assertThat(isDirEmpty(websessionDir)).isFalse();
 
-      TimeMachine.useFixedClockAt(
-          Instant.ofEpochMilli(existingKeyExpireAt).plus(1, ChronoUnit.HOURS));
-      cache.cleanUp();
-      assertThat(isDirEmpty(websessionDir)).isTrue();
     } finally {
       TimeMachine.useSystemDefaultZoneClock();
     }
@@ -277,5 +318,10 @@ public class FlatFileWebSessionCacheTest {
 
   private InputStream loadFile(String file) {
     return this.getClass().getResourceAsStream("/" + file);
+  }
+
+  private void makeExpire(Path webSessionFile) throws IOException {
+    Instant pastInstant = TimeMachine.now().minus(MAX_AGE_HOURS + 1, ChronoUnit.HOURS);
+    Files.setLastModifiedTime(webSessionFile, FileTime.from(pastInstant));
   }
 }
