@@ -14,6 +14,11 @@
 
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
+import static com.google.gerrit.httpd.WebSessionManager.CACHE_NAME;
+import static java.util.concurrent.TimeUnit.HOURS;
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;
@@ -21,6 +26,8 @@ import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.httpd.WebSessionManager;
 import com.google.gerrit.httpd.WebSessionManager.Val;
+import com.google.gerrit.server.config.ConfigUtil;
+import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
@@ -44,10 +51,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
+import org.eclipse.jgit.lib.Config;
 
 @Singleton
 public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
+  protected static final long MAX_AGE_MINUTES = HOURS.toMinutes(12);
+  private final long sessionMaxAgeMillis;
 
   /** Provides static methods to set the system clock for testing purposes only. */
   static class TimeMachine {
@@ -77,8 +87,18 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   private final Path websessionsDir;
 
   @Inject
-  public FlatFileWebSessionCache(@WebSessionDir Path websessionsDir) throws IOException {
+  public FlatFileWebSessionCache(@WebSessionDir Path websessionsDir, @GerritServerConfig Config cfg)
+      throws IOException {
     this.websessionsDir = websessionsDir;
+    this.sessionMaxAgeMillis =
+        SECONDS.toMillis(
+            ConfigUtil.getTimeUnit(
+                cfg,
+                "cache",
+                CACHE_NAME,
+                "maxAge",
+                SECONDS.convert(MAX_AGE_MINUTES, MINUTES),
+                SECONDS));
     Files.createDirectories(websessionsDir);
   }
 
@@ -96,19 +116,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public void cleanUp() {
-    for (Path path : listFiles()) {
-      try {
-        Val val = readFile(path);
-        if (val != null) {
-          Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
-          if (expires.isBefore(TimeMachine.now())) {
-            deleteFile(path);
-          }
-        }
-      } catch (Exception e) {
-        log.atSevere().withCause(e).log("Exception while cleaning %s", path);
-      }
-    }
+    listFiles(new ExpiredFilter(sessionMaxAgeMillis)).forEach(this::deleteFile);
   }
 
   @Override
@@ -231,8 +239,12 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   }
 
   private List<Path> listFiles() {
+    return listFiles(AcceptAllFilter.FILTER);
+  }
+
+  private List<Path> listFiles(DirectoryStream.Filter<Path> filter) {
     List<Path> files = new ArrayList<>();
-    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
+    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir, filter)) {
       for (Path path : dirStream) {
         files.add(path);
       }
@@ -240,5 +252,31 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
       log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
     }
     return files;
+  }
+
+  private static class ExpiredFilter implements DirectoryStream.Filter<Path> {
+    private final long maxAgeMillis;
+
+    private final Instant now = TimeMachine.now();
+
+    ExpiredFilter(long maxAgeMillis) {
+      this.maxAgeMillis = maxAgeMillis;
+    }
+
+    @Override
+    public boolean accept(Path entry) throws IOException {
+      return entry.toFile().lastModified() + maxAgeMillis <= now.toEpochMilli();
+    }
+  }
+
+  private static class AcceptAllFilter implements DirectoryStream.Filter<Path> {
+    private AcceptAllFilter() {}
+
+    @Override
+    public boolean accept(Path entry) {
+      return true;
+    }
+
+    static final AcceptAllFilter FILTER = new AcceptAllFilter();
   }
 }
