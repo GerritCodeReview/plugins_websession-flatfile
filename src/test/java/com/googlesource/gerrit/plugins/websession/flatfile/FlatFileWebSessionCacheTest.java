@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.websession.flatfile;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.httpd.WebSessionManager.CACHE_NAME;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,6 +46,7 @@ public class FlatFileWebSessionCacheTest {
   private static final String EMPTY_KEY = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
   private static final String INVALID_KEY = "aOFdpHriBM6dN055M13PjDdTZagl5r5aSG";
   private static final String NEW_KEY = "abcde12345";
+  private static final Integer MAX_AGE_HOURS = 6;
 
   @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
 
@@ -53,7 +56,9 @@ public class FlatFileWebSessionCacheTest {
   @Before
   public void createFlatFileWebSessionCache() throws Exception {
     websessionDir = tempFolder.newFolder("websessions").toPath();
-    cache = new FlatFileWebSessionCache(websessionDir);
+    Config config = new Config();
+    config.setString("cache", CACHE_NAME, "maxAge", String.format("%dh", MAX_AGE_HOURS));
+    cache = new FlatFileWebSessionCache(websessionDir, config);
   }
 
   @Test
@@ -71,22 +76,22 @@ public class FlatFileWebSessionCacheTest {
   @Test
   public void constructorCreateDir() throws IOException {
     assertThat(websessionDir.toFile().delete()).isTrue();
-    cache = new FlatFileWebSessionCache(websessionDir);
+    cache = new FlatFileWebSessionCache(websessionDir, new Config());
     assertThat(websessionDir.toFile().exists()).isTrue();
   }
 
   @Test
   public void cleanUpTest() throws Exception {
-    loadKeyToCacheDir(EXISTING_KEY);
+    Path webSessionFile = loadKeyToCacheDir(EXISTING_KEY);
+    long webSessionLastModified = webSessionFile.toFile().lastModified();
     try {
-      long existingKeyExpireAt = cache.getIfPresent(EXISTING_KEY).getExpiresAt();
       TimeMachine.useFixedClockAt(
-          Instant.ofEpochMilli(existingKeyExpireAt).minus(1, ChronoUnit.HOURS));
+          Instant.ofEpochMilli(webSessionLastModified).minus(1, ChronoUnit.HOURS));
       cache.cleanUp();
       assertThat(isDirEmpty(websessionDir)).isFalse();
 
       TimeMachine.useFixedClockAt(
-          Instant.ofEpochMilli(existingKeyExpireAt).plus(1, ChronoUnit.HOURS));
+          Instant.ofEpochMilli(webSessionLastModified).plus(MAX_AGE_HOURS, ChronoUnit.HOURS));
       cache.cleanUp();
       assertThat(isDirEmpty(websessionDir)).isTrue();
     } finally {
