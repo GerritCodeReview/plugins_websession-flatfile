@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a52363_7721018c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-20T18:20:26Z",
+      "side": 0,
+      "message": "This is a change of functionality though.\n\nBefore this change:\nsessions are expired at the session creation time - (maxAge value *at the time* the session was created).\n\nAfter this change:\nsessions are expired at the session creation time - maxAge\n\nExample: maxAge \u003d 10 days, user John creates a session on the 1st of January. On the 2nd of January, the Gerrit admin sets maxAge \u003d 1 day  and restarts Gerrit.\n\nBefore this change: John\u0027s session expires on the 11th of January\nAfter this change: John\u0027s session expires on the 2nd of January\n\nThis change in behaviour needs to be documented IMHO and clearly stated on the commit message.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
