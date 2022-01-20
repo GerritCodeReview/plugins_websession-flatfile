@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7f186309_e48cfc6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-20T16:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "068ebe8f_5d4179bf",
+      "range": {
+        "startLine": 18,
+        "startChar": 43,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "83378865_330a1704",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -89,6 +113,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25ead823_c0a87b72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-20T16:27:48Z",
+      "side": 1,
+      "message": "This value ideally should come from [1].\nUnfortunately, the static variable is not public, so we have no access to it.\n\nI was not too concerned about it because the value has been the same since 2013 and because, changing it on a stable branch would not be allowed anyway, so we should be confident it cannot change.\n \n\nI proposed a change to make it public and reuse it [2].\n\n\n[1]https://gerrit.googlesource.com/gerrit/+/refs/heads/stable-3.3/java/com/google/gerrit/httpd/CacheBasedWebSession.java#46\n\n[2]https://gerrit-review.googlesource.com/c/gerrit/+/328609",
+      "parentUuid": "edb3142e_82709ff4",
+      "range": {
+        "startLine": 59,
+        "startChar": 64,
+        "endLine": 59,
+        "endChar": 66
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc7fb9e_09de6fbc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-20T16:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8323fa6_1496443b",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 11
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2af0373c_15348e6a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 1
@@ -100,6 +172,30 @@
       "writtenOn": "2022-01-20T10:28:50Z",
       "side": 1,
       "message": "That\u0027s definitely step in the right direction. Could we also avoid creating the list of paths but instead remove the file when it match the filter",
+      "range": {
+        "startLine": 247,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 94
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7481d12c_5d39118d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-20T16:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2af0373c_15348e6a",
       "range": {
         "startLine": 247,
         "startChar": 4,
@@ -123,6 +219,24 @@
       "writtenOn": "2022-01-20T15:23:19Z",
       "side": 1,
       "message": "what about adding a unit test for this method? It should be pretty straightforward.",
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a26cb2e_a1d90d41",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-20T16:27:48Z",
+      "side": 1,
+      "message": "This is indirectly tested by FlatFileWebSessionCache.cleanup() test.\nAny change to this would cause the test to break.",
+      "parentUuid": "e6a97208_f76d5a98",
       "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
