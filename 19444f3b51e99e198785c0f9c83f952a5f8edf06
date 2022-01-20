@@ -39,6 +39,29 @@
       "message": "Any early feedback would be appreciated",
       "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af0373c_15348e6a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2022-01-20T10:28:50Z",
+      "side": 1,
+      "message": "That\u0027s definitely step in the right direction. Could we also avoid creating the list of paths but instead remove the file when it match the filter",
+      "range": {
+        "startLine": 247,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 94
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
