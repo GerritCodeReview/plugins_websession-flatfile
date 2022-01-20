@@ -43,6 +43,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8323fa6_1496443b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-01-20T15:23:19Z",
+      "side": 1,
+      "message": "why not private?",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 11
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb3142e_82709ff4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-01-20T15:23:19Z",
+      "side": 1,
+      "message": "Isn\u0027t the maxAge configurable? Why is this value hardcoded?",
+      "range": {
+        "startLine": 59,
+        "startChar": 64,
+        "endLine": 59,
+        "endChar": 66
+      },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2af0373c_15348e6a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
         "patchSetId": 1
@@ -60,6 +106,23 @@
         "endLine": 247,
         "endChar": 94
       },
+      "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a97208_f76d5a98",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-01-20T15:23:19Z",
+      "side": 1,
+      "message": "what about adding a unit test for this method? It should be pretty straightforward.",
       "revId": "19444f3b51e99e198785c0f9c83f952a5f8edf06",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
