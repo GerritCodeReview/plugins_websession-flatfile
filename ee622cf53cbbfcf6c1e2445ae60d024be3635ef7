@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954e82ee_1902e72f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-24T09:31:40Z",
+      "side": 1,
+      "message": "LGTM, when the doc is updated. @Nasser?",
+      "revId": "ee622cf53cbbfcf6c1e2445ae60d024be3635ef7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea2b24a_5a823c93",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-24T09:31:40Z",
+      "side": 1,
+      "message": "Can you add the note that this has an effect on Jane\u0027s session validity, similarly to the L81?",
+      "revId": "ee622cf53cbbfcf6c1e2445ae60d024be3635ef7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d61f7ae_997cb1f9",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-24T09:31:40Z",
+      "side": 1,
+      "message": "I\u0027d add *NOTE* for making it more prominent.",
+      "revId": "ee622cf53cbbfcf6c1e2445ae60d024be3635ef7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
