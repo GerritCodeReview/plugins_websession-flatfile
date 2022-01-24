@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df173d18_fc32fd23",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-24T15:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ea2b24a_5a823c93",
+      "revId": "ee622cf53cbbfcf6c1e2445ae60d024be3635ef7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d61f7ae_997cb1f9",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-24T09:31:40Z",
       "side": 1,
       "message": "I\u0027d add *NOTE* for making it more prominent.",
+      "revId": "ee622cf53cbbfcf6c1e2445ae60d024be3635ef7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccf8036c_2d680c0a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-24T15:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d61f7ae_997cb1f9",
       "revId": "ee622cf53cbbfcf6c1e2445ae60d024be3635ef7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
