@@ -96,8 +96,8 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public void cleanUp() {
-    for (Path path : listFiles()) {
-      try {
+    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
+      for (Path path : dirStream) {
         Val val = readFile(path);
         if (val != null) {
           Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
@@ -105,9 +105,9 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
             deleteFile(path);
           }
         }
-      } catch (Exception e) {
-        log.atSevere().withCause(e).log("Exception while cleaning %s", path);
       }
+    } catch (Exception e) {
+      log.atSevere().withCause(e).log("Cannot clean up files in cache %s", websessionsDir);
     }
   }
 
