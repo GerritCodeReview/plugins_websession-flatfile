@@ -70,6 +70,30 @@
       },
       "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200fe7cd_4de01703",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-01-25T01:21:02Z",
+      "side": 0,
+      "message": "If your primary concern is memory usage, getting rid of listFiles() which returns a List instead of a Stream would be a welcomed change which will likely help with that. I would like to see how well such a change used in production works, and whether this is good enough before I would try to modify how the expiration date is looked up.",
+      "parentUuid": "e039ba0e_194db67d",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
