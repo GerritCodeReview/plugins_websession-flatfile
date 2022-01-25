@@ -16,6 +16,24 @@
       "message": "Should be removed now?",
       "revId": "784a60e8901a32d9d720441865ab2bb39bfbdb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7242fba_64968a99",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-25T20:21:55Z",
+      "side": 1,
+      "message": "I don\u0027t think so, to be honest.\nThis change specifically addresses the cleanup() operation and listFiles() is still used in different places with different concerns and intents.",
+      "parentUuid": "352badee_b5e350ec",
+      "revId": "784a60e8901a32d9d720441865ab2bb39bfbdb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
