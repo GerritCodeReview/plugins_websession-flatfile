@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f778ab20_0c43c7c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-25T18:11:11Z",
+      "side": 1,
+      "message": "@Nasser, @Martin, @luca, @Marcin\nI have now split the streaming of files to delete from the refactoring regarding expiration based on file stats.\n\nCould you please take a look at this and the parent change?",
+      "revId": "e2d68f76594fd48ea98c13f14496000a02c944fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
