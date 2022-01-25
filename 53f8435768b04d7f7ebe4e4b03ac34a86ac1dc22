@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c1e6e4_0fb84ebd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-25T16:01:41Z",
+      "side": 1,
+      "message": "nit: should add monorail issue number here\n\nBug: Issue 15562",
+      "revId": "53f8435768b04d7f7ebe4e4b03ac34a86ac1dc22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
