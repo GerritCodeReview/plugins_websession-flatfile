@@ -34,6 +34,24 @@
       "parentUuid": "352badee_b5e350ec",
       "revId": "784a60e8901a32d9d720441865ab2bb39bfbdb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3759ad62_bb705c2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-01-25T20:58:08Z",
+      "side": 1,
+      "message": "I don\u0027t think any of them should use listFiles(), it simply doesn\u0027t scale. If the other uses aren\u0027t problematic for you, then it likely means they aren\u0027t really used (it looks like most of them are there just to satisfy the Cache contract). It would be better to get rid of the other listFile() uses also, but since your change is an improvement even without doing that, I am fine with that not happening in this change.",
+      "parentUuid": "f7242fba_64968a99",
+      "revId": "784a60e8901a32d9d720441865ab2bb39bfbdb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
