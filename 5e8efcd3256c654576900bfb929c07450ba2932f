@@ -142,6 +142,30 @@
       },
       "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ea8abb_7c751198",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-25T18:13:34Z",
+      "side": 0,
+      "message": "@Martin, I believe what you are mentioning was addressed in the parent change (which does just that).\nThis change addresses the expiration based on file stats.\n\nIs that not the case?",
+      "parentUuid": "10277a65_86560e62",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
