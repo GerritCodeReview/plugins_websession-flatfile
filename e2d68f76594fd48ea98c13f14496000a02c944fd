@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "58847d5c_67484bd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-25T20:25:01Z",
+      "side": 1,
+      "message": "I agree.\nDeploying and testing the parent change is a requirement for this change to go through.\n\nLet\u0027s assess that one first and then decide if and how to proceed with this.",
+      "parentUuid": "f70ef658_6e5b39d4",
+      "revId": "e2d68f76594fd48ea98c13f14496000a02c944fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f778ab20_0c43c7c8",
