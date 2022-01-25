@@ -118,6 +118,30 @@
       },
       "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10277a65_86560e62",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-01-25T18:11:07Z",
+      "side": 0,
+      "message": "This didn\u0027t address my concern, you are doing more than one thing in this change, I was asking for a change that only makes a switch from a List to a Stream, and doesn\u0027t alter anything else. If you want to do more than that, propose a follow on change with a clear justification for it.",
+      "parentUuid": "35ae9018_4eefe86a",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
