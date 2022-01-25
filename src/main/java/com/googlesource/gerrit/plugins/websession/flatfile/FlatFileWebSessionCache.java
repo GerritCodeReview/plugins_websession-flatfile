@@ -44,6 +44,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Consumer;
 
 @Singleton
 public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
@@ -96,19 +97,16 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public void cleanUp() {
-    for (Path path : listFiles()) {
-      try {
-        Val val = readFile(path);
-        if (val != null) {
-          Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
-          if (expires.isBefore(TimeMachine.now())) {
-            deleteFile(path);
+    foreachSession(
+        path -> {
+          Val val = readFile(path);
+          if (val != null) {
+            Instant expires = Instant.ofEpochMilli(val.getExpiresAt());
+            if (expires.isBefore(TimeMachine.now())) {
+              deleteFile(path);
+            }
           }
-        }
-      } catch (Exception e) {
-        log.atSevere().withCause(e).log("Exception while cleaning %s", path);
-      }
-    }
+        });
   }
 
   @Override
@@ -240,5 +238,13 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
       log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
     }
     return files;
+  }
+
+  private void foreachSession(Consumer<Path> sessionPath) {
+    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
+      dirStream.forEach(sessionPath);
+    } catch (IOException e) {
+      log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
+    }
   }
 }
