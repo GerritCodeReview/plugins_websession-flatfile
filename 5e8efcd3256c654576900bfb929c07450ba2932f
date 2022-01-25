@@ -46,6 +46,30 @@
       },
       "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e039ba0e_194db67d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-01-25T00:26:24Z",
+      "side": 0,
+      "message": "Do we really want the behavior in the plugin for maxAge to differ from core? That\u0027s my main concern here.\n\nWhat if we did a compromise solution where you use time on disk first and then checked expiresAt? That still creates a difference from core in the scenario where maxAge is changed to be longer than previously.\n\nCould you change the on-disk layout to shard by expiration date? Then you\u0027d avoid the problem of looking at all the files and still be able to match core behavior.",
+      "parentUuid": "287f7632_5f649523",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "5e8efcd3256c654576900bfb929c07450ba2932f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
