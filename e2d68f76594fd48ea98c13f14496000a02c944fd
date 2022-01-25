@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70ef658_6e5b39d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-01-25T18:44:00Z",
+      "side": 1,
+      "message": "I am concerned that this commit message is now based on outdated information. The assumption seems to be that this is a good and needed thing, but I think that it is important to deploy and test the parent change before assuming that all of this still holds. If there are still issues after deploying the parent change, then please update and provide new information about the remaining issue(s) since I am assuming that the parent change will alter things (I am assuming you wouldn\u0027t have proposed it if you don\u0027t also think it will).",
+      "revId": "e2d68f76594fd48ea98c13f14496000a02c944fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f778ab20_0c43c7c8",
