@@ -153,9 +153,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public void invalidateAll() {
-    for (Path path : listFiles()) {
-      deleteFile(path);
-    }
+    foreachSession(this::deleteFile);
   }
 
   @Override
