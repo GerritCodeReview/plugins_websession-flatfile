@@ -45,6 +45,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Singleton
 public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.Val> {
@@ -190,7 +192,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public long size() {
-    return listFiles().size();
+    return sessionStream().count();
   }
 
   @Override
@@ -228,7 +230,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   private List<Path> listFiles() {
     List<Path> files = new ArrayList<>();
-    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
+    try (DirectoryStream<Path> dirStream = sessionDirectoryStream()) {
       for (Path path : dirStream) {
         files.add(path);
       }
@@ -239,10 +241,24 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   }
 
   private void foreachSession(Consumer<Path> sessionPath) {
-    try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(websessionsDir)) {
+    try (DirectoryStream<Path> dirStream = sessionDirectoryStream()) {
       dirStream.forEach(sessionPath);
     } catch (IOException e) {
       log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
     }
+  }
+
+  private Stream<Path> sessionStream() {
+    try {
+      return StreamSupport.stream(
+          sessionDirectoryStream().spliterator(), false /* single-threaded */);
+    } catch (IOException e) {
+      log.atSevere().withCause(e).log("Cannot traverse files in cache %s", websessionsDir);
+      return Stream.empty();
+    }
+  }
+
+  private DirectoryStream<Path> sessionDirectoryStream() throws IOException {
+    return Files.newDirectoryStream(websessionsDir);
   }
 }
