@@ -35,16 +35,15 @@ import java.nio.file.StandardCopyOption;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -87,14 +86,12 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
 
   @Override
   public ConcurrentMap<String, Val> asMap() {
-    ConcurrentMap<String, Val> map = new ConcurrentHashMap<>();
-    for (Path path : listFiles()) {
-      Val v = readFile(path);
-      if (v != null) {
-        map.put(path.getFileName().toString(), v);
-      }
-    }
-    return map;
+    return sessionStream()
+        .map(path -> new SimpleImmutableEntry<>(path.getFileName().toString(), readFile(path)))
+        .filter(entry -> entry.getValue() != null)
+        .collect(
+            Collectors.toConcurrentMap(
+                SimpleImmutableEntry::getKey, SimpleImmutableEntry::getValue));
   }
 
   @Override
@@ -226,18 +223,6 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
     } catch (IOException e) {
       log.atSevere().withCause(e).log("Error trying to delete %s from %s", path, websessionsDir);
     }
-  }
-
-  private List<Path> listFiles() {
-    List<Path> files = new ArrayList<>();
-    try (DirectoryStream<Path> dirStream = sessionDirectoryStream()) {
-      for (Path path : dirStream) {
-        files.add(path);
-      }
-    } catch (IOException e) {
-      log.atSevere().withCause(e).log("Cannot list files in cache %s", websessionsDir);
-    }
-    return files;
   }
 
   private void foreachSession(Consumer<Path> sessionPath) {
