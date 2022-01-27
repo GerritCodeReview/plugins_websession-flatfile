@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92e86b2_11c65978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-27T01:32:04Z",
+      "side": 1,
+      "message": "The cleanup was overall quite lightweight for the system, definitely a nice improvement. The system calls were not so intensive because they have been *delayed* by the time to scan the directory.",
+      "revId": "a6e573ad0209f758b9d76447db8c35cb7371199a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
