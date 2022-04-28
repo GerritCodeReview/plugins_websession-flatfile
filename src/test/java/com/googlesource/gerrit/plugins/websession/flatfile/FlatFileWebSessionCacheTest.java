@@ -18,7 +18,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gerrit.httpd.WebSessionManager;
 import com.google.gerrit.httpd.WebSessionManager.Val;
+import com.google.gerrit.server.config.GerritServerConfig;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCache.TimeMachine;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +38,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+
+import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,6 +56,18 @@ public class FlatFileWebSessionCacheTest {
 
   private FlatFileWebSessionCache cache;
   private Path websessionDir;
+
+  private static final Injector injector = Guice.createInjector(new TestModule());
+  static class TestModule extends AbstractModule {
+    @Override
+    protected void configure() {
+      // GerritServerConfig is required by WebSessionManager
+      bind(Config.class).annotatedWith(GerritServerConfig.class).toInstance(new Config());
+      // Static injection should be avoided if possible, however this is the implementation
+      // currently used in Gerrit core (see change I64db5ed5256564dbc03952e9721615f42212ad48)
+      requestStaticInjection(WebSessionManager.Val.class);
+    }
+  }
 
   @Before
   public void createFlatFileWebSessionCache() throws Exception {
