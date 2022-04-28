@@ -18,7 +18,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gerrit.acceptance.AbstractDaemonTest;
 import com.google.gerrit.httpd.WebSessionManager.Val;
+import com.google.gerrit.server.account.externalids.ExternalIdKeyFactory;
 import com.googlesource.gerrit.plugins.websession.flatfile.FlatFileWebSessionCache.TimeMachine;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +40,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-public class FlatFileWebSessionCacheTest {
+import javax.inject.Inject;
+
+public class FlatFileWebSessionCacheTest extends AbstractDaemonTest {
 
   private static final String EXISTING_KEY = "aSceprtBc02YaMY573T5jfW64ZudJfPbDq";
   private static final String EMPTY_KEY = "aOc2prqlZRpSO3LpauGO5efCLs1L9r9KkG";
@@ -46,6 +50,7 @@ public class FlatFileWebSessionCacheTest {
   private static final String NEW_KEY = "abcde12345";
 
   @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
+  @Inject private ExternalIdKeyFactory externalIdKeyFactory;
 
   private FlatFileWebSessionCache cache;
   private Path websessionDir;
