@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed991518_05e94a26",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-04-29T11:09:32Z",
+      "side": 1,
+      "message": "I am trying to understand how this is fixing the NPE issue, since I don\u0027t see any binding for it?",
+      "revId": "f7f1944a21c74a2a01fbb4bd6cc3a212a5bf40fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
