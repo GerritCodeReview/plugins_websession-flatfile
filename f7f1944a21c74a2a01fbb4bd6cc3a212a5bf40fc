@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f968fa74_5fa5c03a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-05-02T08:23:08Z",
+      "side": 1,
+      "message": "This is actually needed only because of `requestStaticInjection(WebSessionManager.Val.class)`\n\nLet\u0027s just inject statically `WebSessionManager.Val.class` with a comment instead.",
+      "parentUuid": "16d7cd98_d28e55fb",
+      "range": {
+        "startLine": 43,
+        "startChar": 41,
+        "endLine": 43,
+        "endChar": 67
+      },
+      "revId": "f7f1944a21c74a2a01fbb4bd6cc3a212a5bf40fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed991518_05e94a26",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
         "patchSetId": 1

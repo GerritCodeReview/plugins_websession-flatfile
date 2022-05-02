@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b173e78_75b9c863",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCacheTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-05-02T08:23:08Z",
+      "side": 1,
+      "message": "This isn\u0027t doing anything",
+      "revId": "b8d3aa44c8768fc3439a525e9d24430f4db8148c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
