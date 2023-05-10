@@ -208,7 +208,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
             "Entry %s in cache %s has an incompatible class and can't be"
                 + " deserialized. Invalidating entry.",
             path, websessionsDir);
-        log.atFine().withCause(e).log(e.getMessage());
+        log.atFine().withCause(e).log("Exception message %s", e.getMessage());
         invalidate(path.getFileName().toString());
       } catch (IOException e) {
         log.atWarning().withCause(e).log("Cannot read cache %s", websessionsDir);
