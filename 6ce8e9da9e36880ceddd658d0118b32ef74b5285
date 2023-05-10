@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a804bd6_5d98d39a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2023-05-10T13:25:08Z",
+      "side": 1,
+      "message": "Verified with\n```\nbazel test --cache_test_results\u003dNO plugins/websession-flatfile/...\n...\nINFO: Build completed successfully, 8 total actions\n//plugins/websession-flatfile:websession_flatfile_tests                  PASSED in 1.1s\n```",
+      "revId": "6ce8e9da9e36880ceddd658d0118b32ef74b5285",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
