@@ -211,7 +211,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
         log.atFine().withCause(e).log("Exception message %s", e.getMessage());
         invalidate(path.getFileName().toString());
       } catch (IOException e) {
-        log.atWarning().withCause(e).log("Cannot read cache %s", websessionsDir);
+        log.atWarning().withCause(e).log("Cannot read cache %s", path);
       }
     }
     return null;
