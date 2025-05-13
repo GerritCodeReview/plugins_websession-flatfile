@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be20c1ed_84833933",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-13T21:16:52Z",
+      "side": 1,
+      "message": "Should these other items in the directory count towards the `size()` ([L192](https://gerrit.googlesource.com/plugins/websession-flatfile/+/refs/changes/83/475183/5/src/main/java/com/googlesource/gerrit/plugins/websession/flatfile/FlatFileWebSessionCache.java#192)) and should they be included when looking for items to cleanup (also uses `sessionStream()`)?\n\nIf not, then you should do the filtering up front. I think up front would be in both `getIfPresent()` and `sessionDirectoryStream()` (using [this form](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/file/Files.html#newDirectoryStream(java.nio.file.Path,java.nio.file.DirectoryStream.Filter)) of the `newDirectoryStream()` static method in the latter).\n\nSince I\u0027m a little confused about how you have this problem to begin with, I don\u0027t really know if these other cases are going to affect you as well.",
+      "revId": "85b21f2b56f5fcb3864c9629fbaa1d374b0aafec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
