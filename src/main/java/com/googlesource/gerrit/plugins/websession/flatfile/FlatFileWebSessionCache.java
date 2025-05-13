@@ -199,7 +199,7 @@ public class FlatFileWebSessionCache implements Cache<String, WebSessionManager.
   }
 
   private Val readFile(Path path) {
-    if (path.toFile().exists()) {
+    if (Files.isRegularFile(path)) {
       try (InputStream fileStream = Files.newInputStream(path);
           ObjectInputStream objStream = new ObjectInputStream(fileStream)) {
         return (Val) objStream.readObject();
