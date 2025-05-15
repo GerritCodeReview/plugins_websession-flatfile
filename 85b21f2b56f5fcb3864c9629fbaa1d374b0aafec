@@ -34,6 +34,24 @@
       "parentUuid": "be20c1ed_84833933",
       "revId": "85b21f2b56f5fcb3864c9629fbaa1d374b0aafec",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "902ff002_3704ded5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-15T15:54:52Z",
+      "side": 1,
+      "message": "Ah ok. That logging you added in the parent is a good addition and hopefully that will let you and others find similar issues in the future. Thanks for adding the background info!",
+      "parentUuid": "324884c6_727a3cdd",
+      "revId": "85b21f2b56f5fcb3864c9629fbaa1d374b0aafec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
